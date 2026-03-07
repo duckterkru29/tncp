@@ -83,6 +83,7 @@
         .gradient-text {
             background: linear-gradient(135deg, #818cf8 0%, #c084fc 50%, #fb7185 100%);
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
@@ -153,14 +154,42 @@
             animation: float 6s ease-in-out infinite;
         }
 
-        /* Figma Trending: Horizontal Snap Carousel */
+        /* Universal Hide Scrollbar */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none !important;
+        }
+
+        .hide-scrollbar {
+            -ms-overflow-style: none !important;
+            scrollbar-width: none !important;
+        }
+
+        /* Modern Filter Container with Fade Indicator */
+        .filter-container {
+            position: relative;
+            max-width: 100%;
+        }
+
+        .filter-container::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 2px;
+            bottom: 2px;
+            width: 60px;
+            background: linear-gradient(to left, #0a0a0f 20%, transparent 100%);
+            pointer-events: none;
+            z-index: 5;
+            border-radius: 0 1rem 1rem 0;
+        }
+
+        /* Figma Style Carousel */
         .snap-carousel {
             display: flex;
             overflow-x: auto;
             scroll-snap-type: x mandatory;
             gap: 2.5rem;
             padding-bottom: 3rem;
-            padding-inline: 1rem;
             -webkit-overflow-scrolling: touch;
         }
 
@@ -176,10 +205,13 @@
         .portfolio-item {
             flex: 0 0 85vw;
             scroll-snap-align: center;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         @media (min-width: 768px) {
+            .filter-container::after {
+                display: none;
+            }
+
             .portfolio-item {
                 flex: 0 0 450px;
                 scroll-snap-align: start;
@@ -189,7 +221,6 @@
                 padding-inline: 0;
             }
         }
-    </style>
     </style>
     <style>
         /* Custom Code Styling (Highlight.js Line Numbers) */
@@ -444,19 +475,21 @@
                     <p class="text-gray-400 max-w-lg italic">Menampilkan screenshot nyata dari aplikasi yang telah
                         dideploy.</p>
                 </div>
-                <div class="flex gap-2 p-1.5 glass rounded-2xl overflow-x-auto max-w-full custom-scrollbar-hide">
-                    <button onclick="filterProjects('all')"
-                        class="filter-btn active whitespace-nowrap px-6 py-2.5 rounded-xl text-sm font-bold transition-all bg-white text-darker"
-                        data-filter="all">All Systems</button>
-                    <button onclick="filterProjects('web')"
-                        class="filter-btn whitespace-nowrap px-6 py-2.5 rounded-xl text-sm font-bold text-gray-400 hover:text-white transition-all"
-                        data-filter="web">Web Application</button>
-                    <button onclick="filterProjects('mobile')"
-                        class="filter-btn whitespace-nowrap px-6 py-2.5 rounded-xl text-sm font-bold text-gray-400 hover:text-white transition-all"
-                        data-filter="mobile">Mobile App</button>
-                    <button onclick="filterProjects('system')"
-                        class="filter-btn whitespace-nowrap px-6 py-2.5 rounded-xl text-sm font-bold text-gray-400 hover:text-white transition-all"
-                        data-filter="system">Desktop/System</button>
+                <div class="filter-container">
+                    <div class="flex gap-3 p-1 glass rounded-2xl overflow-x-auto hide-scrollbar max-w-full">
+                        <button onclick="filterProjects('all')"
+                            class="filter-btn active whitespace-nowrap px-8 py-3 rounded-xl text-sm font-black transition-all bg-white text-darker shadow-xl"
+                            data-filter="all">All Systems</button>
+                        <button onclick="filterProjects('web')"
+                            class="filter-btn whitespace-nowrap px-8 py-3 rounded-xl text-sm font-bold text-gray-400 hover:text-white transition-all hover:bg-white/5"
+                            data-filter="web">Web Application</button>
+                        <button onclick="filterProjects('mobile')"
+                            class="filter-btn whitespace-nowrap px-8 py-3 rounded-xl text-sm font-bold text-gray-400 hover:text-white transition-all hover:bg-white/5"
+                            data-filter="mobile">Mobile App</button>
+                        <button onclick="filterProjects('system')"
+                            class="filter-btn whitespace-nowrap px-8 py-3 rounded-xl text-sm font-bold text-gray-400 hover:text-white transition-all hover:bg-white/5"
+                            data-filter="system">Desktop/System</button>
+                    </div>
                 </div>
             </div>
 

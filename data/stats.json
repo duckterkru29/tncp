@@ -1,8 +1,32 @@
 {
-  "visits": 24,
+  "visits": 25,
   "orders": 11,
   "articleViews": 3,
   "logs": [
+    {
+      "action": "filter_portfolio",
+      "details": "User filter portfolio ke: system",
+      "time": "2026-03-07T23:38:35.570Z",
+      "ip": "::1"
+    },
+    {
+      "action": "filter_portfolio",
+      "details": "User filter portfolio ke: mobile",
+      "time": "2026-03-07T23:38:33.629Z",
+      "ip": "::1"
+    },
+    {
+      "action": "filter_portfolio",
+      "details": "User filter portfolio ke: web",
+      "time": "2026-03-07T23:38:32.776Z",
+      "ip": "::1"
+    },
+    {
+      "action": "visit",
+      "details": "Home Page",
+      "time": "2026-03-07T23:37:50.948Z",
+      "ip": "::1"
+    },
     {
       "action": "visit",
       "details": "Home Page",

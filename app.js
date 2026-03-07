@@ -109,7 +109,10 @@ window.filterProjects = (category) => {
     if (category === 'all') {
         renderProjects(projectsData);
     } else {
-        const filtered = projectsData.filter(p => p.category.toLowerCase() === category.toLowerCase());
+        const filtered = projectsData.filter(p => {
+            if (!p.category) return false;
+            return p.category.trim().toLowerCase() === category.trim().toLowerCase();
+        });
         renderProjects(filtered);
     }
 

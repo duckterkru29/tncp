@@ -1,1 +1,67 @@
-[]
+[
+  {
+    "id": 1772914922814,
+    "title": "Quran Bersama",
+    "slug": "quran-bersama",
+    "description": "Nama Proyek: QuranBersama\r\n\r\nTujuan: Sebuah aplikasi Al-Quran digital berbasis web yang dirancang untuk memudahkan pengguna membaca, mempelajari, dan berinteraksi dengan Al-Quran secara mandiri maupun bersama-sama (komunal). Fokus utamanya adalah aksesibilitas dan kemudahan navigasi bagi pengguna Muslim di platform digital.\r\n\r\nTarget Pengguna: Individu yang ingin membaca Al-Quran di perangkat mobile/desktop, komunitas pengajian, dan pelajar agama.",
+    "category": "web",
+    "price": 500000,
+    "originalPrice": 1500000,
+    "isAvailable": true,
+    "isPopular": false,
+    "techStack": [
+      "HTML5",
+      "CSS3",
+      "JavaScript (ES6+)",
+      "Tailwind CSS",
+      "Bootstrap",
+      "JSON-based Quran API"
+    ],
+    "features": [
+      "Daftar seluruh 114 surat dalam Al-Quran dengan nomor urut.",
+      "Teks Arab Al-Quran dengan font yang jernih dan mudah dibaca.",
+      "Terjemahan ayat dalam Bahasa Indonesia untuk pemahaman makna.",
+      "Fitur audio murottal per ayat atau per surat untuk mendengarkan bacaan.",
+      "Navigasi cepat antar surat dan ayat melalui menu pencarian/filter.",
+      "Penanda terakhir dibaca (Last Read) untuk melanjutkan tadarus.",
+      "Desain responsif yang menyesuaikan tampilan di HP, tablet, dan laptop.",
+      "Mode gelap (Dark Mode) untuk kenyamanan membaca di malam hari.",
+      "Informasi detail surat (tempat turunnya surat, jumlah ayat, dan arti nama surat).",
+      "Salin (copy) ayat dan terjemahan untuk dibagikan ke media sosial."
+    ],
+    "thumbnail": "1772914922804-346221544.png",
+    "salesCount": 0
+  },
+  {
+    "id": 1772915497707,
+    "title": "FinTrack",
+    "slug": "fintrack",
+    "description": "Nama Proyek: FinTrack\r\n\r\nTujuan: Sebuah aplikasi manajemen keuangan pribadi (Personal Finance Manager) berbasis web yang dirancang untuk membantu pengguna mencatat pemasukan, pengeluaran, serta menganalisis kesehatan finansial melalui visualisasi data dan teknologi AI.\r\n\r\nTarget Pengguna: Individu yang ingin mengelola anggaran bulanan, UMKM kecil untuk pencatatan arus kas sederhana, dan pengguna yang membutuhkan asisten keuangan pintar.",
+    "category": "web",
+    "price": 350000,
+    "originalPrice": 750000,
+    "isAvailable": true,
+    "isPopular": false,
+    "techStack": [
+      "React.js (Vite)",
+      "Tailwind CSS",
+      "Radix UI",
+      "React Context API",
+      ""
+    ],
+    "features": [
+      "Dashboard ringkasan saldo total, pemasukan, dan pengeluaran secara real-time.",
+      "Pencatatan transaksi harian dengan kategori (makanan, transportasi, hiburan, dll).",
+      "Visualisasi data dalam bentuk grafik batang dan lingkaran (Pie Chart).",
+      "Fitur \"AI Financial Assistant\" untuk tanya jawab seputar tips hemat dan analisis data.",
+      "Sistem autentikasi aman (Login & Register) menggunakan email atau Google.",
+      "Riwayat transaksi yang dapat difilter berdasarkan rentang tanggal tertentu.",
+      "Manajemen anggaran (Budgeting) untuk membatasi pengeluaran per kategori.",
+      "Sinkronisasi data otomatis antar perangkat karena berbasis cloud (Firebase).",
+      "Mode tampilan gelap (Dark Mode) dan terang (Light Mode).",
+      "Ekspor laporan keuangan ke format PDF atau Excel (CSV)."
+    ],
+    "thumbnail": "1772915497697-624684673.png",
+    "salesCount": 0
+  }
+]

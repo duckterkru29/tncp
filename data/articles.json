@@ -1,1 +1,15 @@
-[]
+[
+  {
+    "id": 1772915711456,
+    "title": "Cek Penggunaan Bandwidth Pada Server Linux",
+    "slug": "cek-penggunaan-bandwidth-pada-server-linux",
+    "excerpt": "",
+    "content": "Instal package vnstat pada linux:\r\n\r\nRHEL/Centos\r\n\r\nyum install vnstat\r\nDebian/Ubuntu\r\n\r\napt-get install vnstat\r\nUntuk Menggunakannya:\r\n\r\nvnstat\r\nDan akan menampilkan output RX/TX/Total/Estimated seperti di cover\r\n\r\nKeterangan:\r\nRX = Transfer bandwidth masuk (Download)\r\nTX = Transfer bandwidth keluar (Upload)\r\nTotal = Keseluruhan bandwidth TX/RX\r\nEstimated = Perkiraan pemakaian bandwidth dari awal bulan sampai saat ini",
+    "category": "TIPS",
+    "tags": [],
+    "coverImage": "1772915711454-393466643.png",
+    "readTime": 5,
+    "views": 0,
+    "publishedDate": "2026-03-07T20:35:11.456Z"
+  }
+]

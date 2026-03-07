@@ -46,7 +46,7 @@ function renderProjects(data) {
     grid.innerHTML = data.map(item => `
         <div class="glass-card rounded-[32px] overflow-hidden group reveal">
             <div class="relative aspect-video overflow-hidden">
-                <img src="${item.thumbnail || `https://source.unsplash.com/800x600/?technology,code,${item.id}`}" 
+                <img src="${item.thumbnail ? './uploads/' + item.thumbnail : `https://source.unsplash.com/800x600/?technology,code,${item.id}`}" 
                      class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
                      alt="${item.title}">
                 <div class="absolute inset-0 bg-gradient-to-t from-darker via-transparent to-transparent opacity-80"></div>
@@ -74,7 +74,7 @@ function renderProjects(data) {
                         <div class="text-sm text-gray-500 line-through decoration-accent/50 opacity-50">Rp ${(item.originalPrice / 1000).toFixed(0)}K</div>
                         <div class="text-2xl font-display font-black text-white">Rp ${(item.price / 1000).toFixed(0)}K</div>
                     </div>
-                    <button onclick="addToCart('${item.title}', ${item.price}, '${item.thumbnail}')" 
+                    <button onclick="addToCart('${item.title}', ${item.price}, './uploads/${item.thumbnail}')" 
                             class="p-4 bg-white/5 hover:bg-primary rounded-2xl transition-all group/btn">
                         <i data-lucide="shopping-cart" class="w-6 h-6 text-white group-hover/btn:scale-110 transition-transform"></i>
                     </button>
@@ -93,18 +93,22 @@ function renderMarketplace(data) {
     const grid = document.getElementById('store-grid');
     if (!grid) return;
 
-    // Show only 4 newest/popular items in CTA section
     grid.innerHTML = data.slice(0, 4).map(item => `
         <div class="glass p-5 rounded-3xl space-y-4 hover:border-primary/50 transition-colors">
             <div class="aspect-square rounded-2xl overflow-hidden">
-                <img src="${item.thumbnail || `https://source.unsplash.com/400x400/?software,app,${item.id}`}" class="w-full h-full object-cover">
+                <img src="${item.thumbnail ? './uploads/' + item.thumbnail : `https://source.unsplash.com/400x400/?software,app,${item.id}`}" class="w-full h-full object-cover">
             </div>
             <div class="text-left">
                 <h4 class="font-bold text-sm line-clamp-1">${item.title}</h4>
-                <p class="text-primary font-black mt-1">Rp ${(item.price / 1000).toFixed(0)}K</p>
+                <div class="flex justify-between items-center mt-2">
+                    <span class="text-accent font-black text-sm">Rp ${(item.price / 1000).toFixed(0)}K</span>
+                    <button onclick="addToCart('${item.title}', ${item.price}, './uploads/${item.thumbnail}')" class="text-primary hover:text-white"><i data-lucide="plus-circle" class="w-5 h-5"></i></button>
+                </div>
             </div>
         </div>
     `).join('');
+
+    if (window.lucide) lucide.createIcons();
 }
 
 // ==========================================
@@ -118,7 +122,7 @@ function renderArticles(data) {
         <article class="group cursor-pointer reveal" onclick="window.alert('Viewing: ${art.title}')">
             <div class="glass-card rounded-[32px] overflow-hidden">
                 <div class="relative h-56 overflow-hidden">
-                    <img src="${art.coverImage || `https://source.unsplash.com/800x600/?tech,it,${art.id}`}" 
+                    <img src="${art.coverImage ? './uploads/' + art.coverImage : `https://source.unsplash.com/800x600/?tech,it,${art.id}`}" 
                          class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700">
                     <div class="absolute top-6 left-6">
                         <span class="px-4 py-1.5 bg-dark/80 backdrop-blur-md rounded-full text-[10px] font-black uppercase tracking-widest border border-white/10">${art.category}</span>
@@ -138,28 +142,6 @@ function renderArticles(data) {
 
     if (window.lucide) lucide.createIcons();
 }
-
-// ==========================================
-// FILTRATION
-// ==========================================
-window.filterProjects = (category) => {
-    // Update active button
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-        if (btn.dataset.filter === category) {
-            btn.classList.add('bg-white', 'text-darker');
-            btn.classList.remove('text-gray-400');
-        } else {
-            btn.classList.remove('bg-white', 'text-darker');
-            btn.classList.add('text-gray-400');
-        }
-    });
-
-    const filtered = category === 'all'
-        ? projectsData
-        : projectsData.filter(p => p.category === category);
-
-    renderProjects(filtered);
-};
 
 // ==========================================
 // CART LOGIC

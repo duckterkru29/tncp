@@ -119,7 +119,7 @@ function renderArticles(data) {
     if (!grid) return;
 
     grid.innerHTML = data.map(art => `
-        <article class="group cursor-pointer reveal" onclick="window.alert('Viewing: ${art.title}')">
+        <article class="group cursor-pointer reveal" onclick="viewArticle(${art.id})">
             <div class="glass-card rounded-[32px] overflow-hidden">
                 <div class="relative h-56 overflow-hidden">
                     <img src="${art.coverImage ? './uploads/' + art.coverImage : `https://source.unsplash.com/800x600/?tech,it,${art.id}`}" 
@@ -255,3 +255,45 @@ function initScrollReveal() {
 
 // Start
 document.addEventListener('DOMContentLoaded', init);
+
+// ==========================================
+// ARTICLE READER LOGIC
+// ==========================================
+window.viewArticle = (id) => {
+    const art = articlesData.find(a => a.id === id);
+    if (!art) return;
+
+    const modal = document.getElementById('article-modal');
+    const sidebar = document.getElementById('article-sidebar');
+
+    // Fill Content
+    document.getElementById('art-modal-title').innerText = art.title;
+    document.getElementById('art-modal-category').innerText = art.category;
+    document.getElementById('art-modal-date').innerText = new Date(art.publishedDate).toLocaleDateString();
+    document.getElementById('art-modal-cover').src = art.coverImage ? './uploads/' + art.coverImage : `https://source.unsplash.com/800x600/?tech,it,${art.id}`;
+
+    // Render Markdown
+    const contentEl = document.getElementById('art-modal-content');
+    contentEl.innerHTML = marked.parse(art.content || '*Tidak ada konten.*');
+
+    // Highlight Code
+    contentEl.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+    });
+
+    // Show Modal
+    modal.classList.remove('hidden');
+    setTimeout(() => {
+        sidebar.classList.remove('translate-x-full');
+    }, 10);
+};
+
+window.closeArticle = () => {
+    const modal = document.getElementById('article-modal');
+    const sidebar = document.getElementById('article-sidebar');
+
+    sidebar.classList.add('translate-x-full');
+    setTimeout(() => {
+        modal.classList.add('hidden');
+    }, 500);
+};

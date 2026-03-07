@@ -14,6 +14,10 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <!-- Marked & Highlight -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link
@@ -458,6 +462,45 @@
                 Checkout via WhatsApp <i data-lucide="external-link" class="w-5 h-5"></i>
             </button>
             <p class="text-center text-xs text-gray-500">Pembayaran aman & source code dikirim instan.</p>
+        </div>
+    </div>
+
+    <!-- Article Reader Modal -->
+    <div id="article-modal" class="fixed inset-0 z-[100] hidden overflow-hidden">
+        <div class="absolute inset-0 bg-darker/95 backdrop-blur-xl" onclick="closeArticle()"></div>
+        <div class="absolute inset-y-0 right-0 w-full md:w-[800px] bg-dark border-l border-white/10 shadow-2xl flex flex-col transition-transform duration-500 translate-x-full"
+            id="article-sidebar">
+            <div
+                class="p-8 border-b border-white/5 flex justify-between items-center bg-dark/50 backdrop-blur-md sticky top-0 z-10">
+                <div class="flex items-center gap-4">
+                    <button onclick="closeArticle()"
+                        class="w-10 h-10 glass rounded-full flex items-center justify-center hover:bg-white/10">
+                        <i data-lucide="arrow-left" class="w-5 h-5"></i>
+                    </button>
+                    <span class="text-xs font-black tracking-widest text-primary uppercase">Reader Mode</span>
+                </div>
+                <div class="flex gap-2">
+                    <button class="w-10 h-10 glass rounded-full flex items-center justify-center"><i
+                            data-lucide="share-2" class="w-4 h-4"></i></button>
+                    <button onclick="closeArticle()"
+                        class="w-10 h-10 glass rounded-full flex items-center justify-center"><i data-lucide="x"
+                            class="w-5 h-5"></i></button>
+                </div>
+            </div>
+            <div class="flex-1 overflow-y-auto p-8 md:p-12 custom-scrollbar">
+                <img id="art-modal-cover" src="" class="w-full h-[300px] object-cover rounded-[32px] mb-10 shadow-2xl">
+                <div class="space-y-6 max-w-2xl mx-auto">
+                    <div class="flex items-center gap-4 text-xs font-bold text-gray-500 uppercase tracking-widest">
+                        <span id="art-modal-date"></span>
+                        <span id="art-modal-category" class="text-primary"></span>
+                    </div>
+                    <h2 id="art-modal-title" class="text-4xl md:text-5xl font-display font-bold leading-tight"></h2>
+                    <div id="art-modal-content"
+                        class="prose prose-invert prose-primary max-w-none text-gray-400 leading-relaxed text-lg">
+                        <!-- Markdown Content Here -->
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

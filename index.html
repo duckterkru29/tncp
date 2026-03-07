@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TNCP - Tech Portfolio & Source Code</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#6366f1',
+                        secondary: '#a855f7',
+                        accent: '#ec4899',
+                        dark: '#0f172a',
+                        darker: '#020617',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .glass-dark {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card-hover:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px -12px rgba(99, 102, 241, 0.25);
+        }
+
+        .blob {
+            position: absolute;
+            filter: blur(80px);
+            opacity: 0.4;
+            animation: float 10s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body class="bg-darker text-gray-100 font-sans antialiased overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 transition-all duration-300" id="navbar">
+        <div class="glass-dark mx-4 mt-4 rounded-2xl px-6 py-4 max-w-7xl mx-auto">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center gap-2">
+                    <div
+                        class="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center">
+                        <i data-lucide="code-2" class="w-6 h-6 text-white"></i>
+                    </div>
+                    <span class="font-display font-bold text-xl tracking-tight">TNCP</span>
+                </div>
+
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="#home" class="text-sm font-medium hover:text-primary transition-colors">Beranda</a>
+                    <a href="#projects" class="text-sm font-medium hover:text-primary transition-colors">Proyek</a>
+                    <a href="#store" class="text-sm font-medium hover:text-primary transition-colors">Toko</a>
+                    <a href="#articles" class="text-sm font-medium hover:text-primary transition-colors">Artikel</a>
+                    <a href="#contact" class="text-sm font-medium hover:text-primary transition-colors">Kontak</a>
+                </div>
+
+                <div class="flex items-center gap-4">
+                    <button onclick="toggleCart()"
+                        class="relative p-2 glass rounded-lg hover:bg-white/10 transition-colors">
+                        <i data-lucide="shopping-cart" class="w-5 h-5"></i>
+                        <span id="cart-count"
+                            class="absolute -top-1 -right-1 w-5 h-5 bg-accent rounded-full text-xs flex items-center justify-center hidden">0</span>
+                    </button>
+                    <button class="md:hidden" onclick="toggleMobileMenu()">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                    <a href="#contact"
+                        class="hidden md:flex bg-gradient-to-r from-primary to-secondary px-6 py-2.5 rounded-full text-sm font-semibold hover:shadow-lg hover:shadow-primary/30 transition-all transform hover:scale-105">Hire
+                        Me</a>
+                </div>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden glass-dark mx-4 mt-2 rounded-2xl p-6">
+            <div class="flex flex-col gap-4">
+                <a href="#home" class="text-sm font-medium hover:text-primary">Beranda</a>
+                <a href="#projects" class="text-sm font-medium hover:text-primary">Proyek</a>
+                <a href="#store" class="text-sm font-medium hover:text-primary">Toko</a>
+                <a href="#articles" class="text-sm font-medium hover:text-primary">Artikel</a>
+                <a href="#contact" class="text-sm font-medium hover:text-primary">Kontak</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+        <div class="blob bg-primary w-96 h-96 rounded-full top-20 -left-20"></div>
+        <div class="blob bg-secondary w-80 h-80 rounded-full bottom-20 -right-20" style="animation-delay: 2s;"></div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+            <div class="space-y-8 reveal active">
+                <div
+                    class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-sm font-medium text-primary">
+                    <span class="w-2 h-2 bg-primary rounded-full animate-pulse"></span>
+                    Available for freelance
+                </div>
+
+                <h1 class="font-display text-5xl md:text-7xl font-bold leading-tight">
+                    Building <span class="gradient-text">Digital Solutions</span> That Matter
+                </h1>
+
+                <p class="text-lg text-gray-400 max-w-lg leading-relaxed">
+                    Saya adalah developer full-stack dan IT expert yang menciptakan aplikasi inovatif, sistem
+                    enterprise, dan berbagi pengetahuan teknologi.
+                </p>
+
+                <div class="flex flex-wrap gap-4">
+                    <a href="#projects"
+                        class="bg-gradient-to-r from-primary to-secondary px-8 py-4 rounded-full font-semibold hover:shadow-xl hover:shadow-primary/30 transition-all transform hover:scale-105 flex items-center gap-2">
+                        Lihat Proyek <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                    </a>
+                    <a href="#store"
+                        class="glass px-8 py-4 rounded-full font-semibold hover:bg-white/10 transition-all flex items-center gap-2">
+                        <i data-lucide="shopping-bag" class="w-5 h-5"></i> Toko Source Code
+                    </a>
+                </div>
+
+                <div class="flex items-center gap-6 pt-4">
+                    <div class="flex -space-x-3">
+                        <div
+                            class="w-12 h-12 rounded-full border-2 border-darker bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-sm font-bold">
+                            JD</div>
+                        <div
+                            class="w-12 h-12 rounded-full border-2 border-darker bg-gradient-to-br from-secondary to-accent flex items-center justify-center text-sm font-bold">
+                            MK</div>
+                        <div
+                            class="w-12 h-12 rounded-full border-2 border-darker bg-gradient-to-br from-accent to-primary flex items-center justify-center text-sm font-bold">
+                            AR</div>
+                    </div>
+                    <div>
+                        <p class="font-bold text-2xl">50+</p>
+                        <p class="text-sm text-gray-400">Proyek Selesai</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="relative reveal active">
+                <div class="relative z-10 grid grid-cols-2 gap-4">
+                    <div class="space-y-4 mt-8">
+                        <div class="glass rounded-2xl p-4 card-hover">
+                            <div
+                                class="bg-gradient-to-br from-primary/20 to-secondary/20 rounded-xl w-full h-40 mb-3 flex items-center justify-center">
+                                <i data-lucide="layout-dashboard" class="w-16 h-16 text-primary"></i>
+                            </div>
+                            <h3 class="font-semibold text-sm">Analytics Dashboard</h3>
+                            <p class="text-xs text-gray-400">React & Node.js</p>
+                        </div>
+                        <div class="glass rounded-2xl p-4 card-hover bg-gradient-to-br from-primary/20 to-secondary/20">
+                            <div class="flex items-center gap-3 mb-3">
+                                <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+                                    <i data-lucide="smartphone" class="w-5 h-5"></i>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-sm">Mobile App</p>
+                                    <p class="text-xs text-gray-400">Flutter</p>
+                                </div>
+                            </div>
+                            <div class="h-2 bg-gray-700 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-primary to-secondary w-3/4"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="glass rounded-2xl p-4 card-hover bg-gradient-to-br from-secondary/20 to-accent/20">
+                            <i data-lucide="database" class="w-8 h-8 text-secondary mb-2"></i>
+                            <h3 class="font-semibold text-sm">ERP System</h3>
+                            <p class="text-xs text-gray-400 mt-1">Enterprise Solution</p>
+                        </div>
+                        <div class="glass rounded-2xl p-4 card-hover">
+                            <div
+                                class="bg-gradient-to-br from-secondary/20 to-accent/20 rounded-xl w-full h-48 mb-3 flex items-center justify-center">
+                                <i data-lucide="shopping-cart" class="w-16 h-16 text-secondary"></i>
+                            </div>
+                            <h3 class="font-semibold text-sm">E-Commerce Platform</h3>
+                            <p class="text-xs text-gray-400">Full Stack Development</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="glass rounded-3xl p-8 md:p-12 grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div class="text-center reveal">
+                    <p class="text-4xl font-display font-bold gradient-text">5+</p>
+                    <p class="text-gray-400 mt-2">Tahun Pengalaman</p>
+                </div>
+                <div class="text-center reveal">
+                    <p class="text-4xl font-display font-bold gradient-text">50+</p>
+                    <p class="text-gray-400 mt-2">Proyek Selesai</p>
+                </div>
+                <div class="text-center reveal">
+                    <p class="text-4xl font-display font-bold gradient-text">30+</p>
+                    <p class="text-gray-400 mt-2">Source Code Terjual</p>
+                </div>
+                <div class="text-center reveal">
+                    <p class="text-4xl font-display font-bold gradient-text">100%</p>
+                    <p class="text-gray-400 mt-2">Kepuasan Klien</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12 reveal">
+                <div>
+                    <h2 class="font-display text-4xl md:text-5xl font-bold mb-4">Proyek <span
+                            class="gradient-text">Unggulan</span></h2>
+                    <p class="text-gray-400 max-w-xl">Kumpulan aplikasi dan sistem yang telah saya kembangkan dengan
+                        teknologi terkini.</p>
+                </div>
+
+                <div class="flex gap-2 mt-6 md:mt-0 overflow-x-auto hide-scrollbar pb-2">
+                    <button onclick="filterProjects('all')"
+                        class="filter-btn active px-6 py-2 rounded-full text-sm font-medium transition-all bg-primary text-white"
+                        data-filter="all">Semua</button>
+                    <button onclick="filterProjects('web')"
+                        class="filter-btn px-6 py-2 rounded-full text-sm font-medium transition-all glass hover:bg-white/10"
+                        data-filter="web">Web App</button>
+                    <button onclick="filterProjects('mobile')"
+                        class="filter-btn px-6 py-2 rounded-full text-sm font-medium transition-all glass hover:bg-white/10"
+                        data-filter="mobile">Mobile</button>
+                    <button onclick="filterProjects('system')"
+                        class="filter-btn px-6 py-2 rounded-full text-sm font-medium transition-all glass hover:bg-white/10"
+                        data-filter="system">Enterprise</button>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-grid">
+                <!-- Loading State -->
+                <div class="col-span-full text-center py-12">
+                    <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+                    <p class="mt-4 text-gray-400">Loading projects...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Store Section -->
+    <section id="store" class="py-24 relative bg-gradient-to-b from-darker to-dark">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <h2 class="font-display text-4xl md:text-5xl font-bold mb-4">Source Code <span
+                        class="gradient-text">Marketplace</span></h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Dapatkan source code berkualitas dengan dokumentasi lengkap
+                    dan support teknis.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="store-grid">
+                <!-- Loading State -->
+                <div class="col-span-full text-center py-12">
+                    <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+                    <p class="mt-4 text-gray-400">Loading products...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Articles Section -->
+    <section id="articles" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12 reveal">
+                <div>
+                    <h2 class="font-display text-4xl md:text-5xl font-bold mb-4">Artikel & <span
+                            class="gradient-text">Insights</span></h2>
+                    <p class="text-gray-400 max-w-xl">Berbagi pengetahuan dan pengalaman dalam dunia IT dan programming.
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="articles-grid">
+                <!-- Loading State -->
+                <div class="col-span-full text-center py-12">
+                    <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+                    <p class="mt-4 text-gray-400">Loading articles...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 relative bg-gradient-to-b from-dark to-darker">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="reveal">
+                    <h2 class="font-display text-4xl md:text-5xl font-bold mb-6">Mari <span
+                            class="gradient-text">Bekerjasama</span></h2>
+                    <p class="text-lg text-gray-400 mb-8">Tertarik untuk berkolaborasi atau memiliki proyek yang ingin
+                        direalisasikan?</p>
+
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 glass rounded-xl flex items-center justify-center">
+                                <i data-lucide="mail" class="w-6 h-6 text-primary"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-400">Email</p>
+                                <p class="font-semibold">hello@tncp.dev</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 glass rounded-xl flex items-center justify-center">
+                                <i data-lucide="phone" class="w-6 h-6 text-secondary"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-400">Telepon</p>
+                                <p class="font-semibold">+62 812 3456 7890</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass rounded-3xl p-8 reveal">
+                    <form class="space-y-6" onsubmit="handleSubmit(event)">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Nama</label>
+                                <input type="text"
+                                    class="w-full bg-darker border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-primary transition-colors"
+                                    placeholder="John Doe" required>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Email</label>
+                                <input type="email"
+                                    class="w-full bg-darker border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-primary transition-colors"
+                                    placeholder="john@example.com" required>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Pesan</label>
+                            <textarea rows="4"
+                                class="w-full bg-darker border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-primary transition-colors resize-none"
+                                placeholder="Ceritakan tentang proyek Anda..." required></textarea>
+                        </div>
+                        <button type="submit"
+                            class="w-full bg-gradient-to-r from-primary to-secondary py-4 rounded-xl font-semibold hover:shadow-lg hover:shadow-primary/30 transition-all transform hover:scale-[1.02] flex items-center justify-center gap-2">
+                            <i data-lucide="send" class="w-5 h-5"></i> Kirim Pesan
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="flex items-center gap-2">
+                    <div
+                        class="w-8 h-8 bg-gradient-to-br from-primary to-secondary rounded-lg flex items-center justify-center">
+                        <i data-lucide="code-2" class="w-5 h-5 text-white"></i>
+                    </div>
+                    <span class="font-display font-bold text-lg">TNCP</span>
+                </div>
+                <p class="text-gray-400 text-sm">© 2024 TNCP. All rights reserved.</p>
+                <div class="flex gap-6 text-sm text-gray-400">
+                    <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Sidebar -->
+    <div id="cart-sidebar"
+        class="fixed inset-y-0 right-0 w-full md:w-96 bg-darker border-l border-white/10 transform translate-x-full transition-transform duration-300 z-50 p-6 overflow-y-auto">
+        <div class="flex justify-between items-center mb-6">
+            <h3 class="font-display text-2xl font-bold">Keranjang</h3>
+            <button onclick="toggleCart()" class="p-2 hover:bg-white/10 rounded-lg transition-colors">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+        </div>
+        <div id="cart-items" class="space-y-4 mb-6">
+            <p class="text-gray-400 text-center py-8">Keranjang kosong</p>
+        </div>
+        <div class="border-t border-white/10 pt-4">
+            <div class="flex justify-between items-center mb-4">
+                <span class="text-gray-400">Total</span>
+                <span id="cart-total" class="text-2xl font-bold gradient-text">Rp 0</span>
+            </div>
+            <button onclick="checkout()"
+                class="w-full bg-gradient-to-r from-primary to-secondary py-3 rounded-xl font-semibold hover:shadow-lg transition-all">
+                Checkout via WhatsApp
+            </button>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div id="toast"
+        class="fixed bottom-6 right-6 bg-gradient-to-r from-primary to-secondary px-6 py-4 rounded-xl shadow-2xl transform translate-y-20 opacity-0 transition-all duration-300 z-50 flex items-center gap-3">
+        <i data-lucide="check-circle" class="w-5 h-5"></i>
+        <span id="toast-message">Item added to cart!</span>
+    </div>
+
+    <!-- Scripts -->
+    <script src="config.js"></script>
+    <script src="app.js"></script>
+    <script>
+        lucide.createIcons();
+
+        // Mobile menu
+        function toggleMobileMenu() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        }
+
+        // Scroll reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+        // Navbar scroll
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) navbar.classList.add('glass-dark');
+            else navbar.classList.remove('glass-dark');
+        });
+    </script>
+</body>
+
+</html>

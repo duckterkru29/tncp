@@ -1,4 +1,8 @@
-// app.js - Main Application Logic
+// app.js - Main Application Logic (Static JSON Version - GitHub Pages Ready)
+
+const CONFIG = {
+    WHATSAPP_NUMBER: '6281310387659'
+};
 
 // State Management
 let cart = [];
@@ -6,119 +10,47 @@ let currentFilter = 'all';
 let projectsData = [];
 let articlesData = [];
 
-// Cache mechanism
-const cache = {
-    projects: null,
-    articles: null,
-    lastFetch: null
-};
-const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
-
-// API Functions
-async function fetchFromAPI(endpoint) {
+// ==========================================
+// FETCH DATA DARI FILE JSON STATIS
+// ==========================================
+async function fetchProjects() {
     try {
-        const response = await fetch(`${CONFIG.API_URL}${endpoint}?populate=*`);
-        if (!response.ok) throw new Error('API Error');
-        const data = await response.json();
-        return data.data;
+        const response = await fetch('data/projects.json');
+        if (!response.ok) throw new Error('Gagal memuat projects');
+        return await response.json();
     } catch (error) {
-        console.error('API Error:', error);
-        return loadFallbackData(endpoint);
+        console.error('Error loading projects:', error);
+        return [];
     }
 }
 
-function loadFallbackData(endpoint) {
-    // Fallback ke data statis jika API fail
-    if (endpoint.includes('projects')) {
-        return [
-            {
-                id: 1,
-                attributes: {
-                    title: "Sistem Inventory Pro",
-                    slug: "sistem-inventory-pro",
-                    description: "Sistem manajemen inventory lengkap dengan barcode scanner",
-                    category: "system",
-                    price: 2500000,
-                    originalPrice: 5000000,
-                    isAvailable: true,
-                    isPopular: true,
-                    techStack: [{ name: "Laravel" }, { name: "Vue.js" }, { name: "MySQL" }],
-                    features: [{ text: "Multi-cabang" }, { text: "Barcode Scanner" }, { text: "Laporan PDF" }],
-                    thumbnail: { data: { attributes: { url: "/placeholder-project.jpg" } } },
-                    salesCount: 45
-                }
-            }
-        ];
+async function fetchArticles() {
+    try {
+        const response = await fetch('data/articles.json');
+        if (!response.ok) throw new Error('Gagal memuat articles');
+        return await response.json();
+    } catch (error) {
+        console.error('Error loading articles:', error);
+        return [];
     }
-    return [];
 }
 
-// Transform Functions
-function transformProject(item) {
-    const attrs = item.attributes || item;
-    return {
-        id: item.id,
-        title: attrs.title,
-        slug: attrs.slug,
-        description: attrs.description,
-        category: attrs.category,
-        price: attrs.price,
-        originalPrice: attrs.originalPrice,
-        isAvailable: attrs.isAvailable !== false,
-        isPopular: attrs.isPopular || false,
-        techStack: (attrs.techStack || []).map(t => t.name || t),
-        features: (attrs.features || []).map(f => f.text || f),
-        thumbnail: attrs.thumbnail?.data?.attributes?.url
-            ? `${CONFIG.IMAGE_URL}${attrs.thumbnail.data.attributes.url}`
-            : `https://via.placeholder.com/600x400/6366f1/ffffff?text=${encodeURIComponent(attrs.title)}`,
-        screenshots: (attrs.screenshots?.data || []).map(img =>
-            `${CONFIG.IMAGE_URL}${img.attributes.url}`
-        ),
-        demoUrl: attrs.demoUrl,
-        githubUrl: attrs.githubUrl,
-        salesCount: attrs.salesCount || 0
-    };
-}
-
-function transformArticle(item) {
-    const attrs = item.attributes || item;
-    return {
-        id: item.id,
-        title: attrs.title,
-        slug: attrs.slug,
-        excerpt: attrs.excerpt,
-        content: attrs.content,
-        coverImage: attrs.coverImage?.data?.attributes?.url
-            ? `${CONFIG.IMAGE_URL}${attrs.coverImage.data.attributes.url}`
-            : `https://via.placeholder.com/600x400/a855f7/ffffff?text=${encodeURIComponent(attrs.title)}`,
-        category: attrs.category?.data?.attributes?.name || 'Tech',
-        tags: (attrs.tags?.data || []).map(t => t.attributes?.name || t),
-        readTime: attrs.readTime || 5,
-        publishedDate: attrs.publishedDate || attrs.createdAt || new Date().toISOString(),
-        views: attrs.views || 0
-    };
-}
-
-// Render Functions
+// ==========================================
+// RENDER FUNCTIONS
+// ==========================================
 async function renderProjects() {
     const container = document.getElementById('projects-grid');
     if (!container) return;
 
-    try {
-        const data = await fetchFromAPI('/projects');
-        projectsData = data.map(transformProject).filter(p => p.isAvailable);
-
-        displayProjects(projectsData);
-    } catch (error) {
-        container.innerHTML = '<div class="col-span-full text-center text-red-400">Failed to load projects</div>';
-    }
+    projectsData = (await fetchProjects()).filter(p => p.isAvailable);
+    displayProjects(projectsData);
 }
 
 function displayProjects(projects) {
     const container = document.getElementById('projects-grid');
 
     if (projects.length === 0) {
-        container.innerHTML = '<div class="col-span-full text-center text-gray-400">No projects found</div>';
+        container.innerHTML = '<div class="col-span-full text-center text-gray-400 py-12">Belum ada project tersedia</div>';
         return;
     }
 
@@ -126,8 +58,8 @@ function displayProjects(projects) {
         <div class="project-card group reveal" data-category="${project.category}">
             <div class="glass rounded-3xl overflow-hidden card-hover h-full flex flex-col">
                 <div class="relative overflow-hidden">
-                    <img src="${project.thumbnail}" 
-                         class="w-full h-56 object-cover transform group-hover:scale-110 transition-transform duration-500" 
+                    <img src="${project.thumbnail || `https://via.placeholder.com/600x400/6366f1/ffffff?text=${encodeURIComponent(project.title)}`}"
+                         class="w-full h-56 object-cover transform group-hover:scale-110 transition-transform duration-500"
                          alt="${project.title}" loading="lazy">
                     ${project.isPopular ? '<div class="absolute top-4 right-4 bg-accent text-white px-3 py-1 rounded-full text-xs font-bold">POPULAR</div>' : ''}
                     <div class="absolute inset-0 bg-gradient-to-t from-darker to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
@@ -153,13 +85,13 @@ function displayProjects(projects) {
                             </div>
                             <span class="text-xs text-gray-400">${project.salesCount} sales</span>
                         </div>
-                        
+
                         <div class="flex gap-2">
-                            <button onclick="showProjectDetail('${project.slug}')" 
+                            <button onclick="showProjectDetail('${project.slug}')"
                                     class="flex-1 py-2 rounded-xl glass hover:bg-white/10 transition-colors text-sm font-medium">
                                 Detail
                             </button>
-                            <button onclick="addToCart('${project.title}', ${project.price})" 
+                            <button onclick="addToCart('${project.title}', ${project.price})"
                                     class="flex-1 py-2 rounded-xl bg-gradient-to-r from-primary to-secondary hover:shadow-lg transition-all text-sm font-medium">
                                 Beli
                             </button>
@@ -178,10 +110,8 @@ async function renderStore() {
     const container = document.getElementById('store-grid');
     if (!container) return;
 
-    // Reuse projects data or fetch
     if (projectsData.length === 0) {
-        const data = await fetchFromAPI('/projects');
-        projectsData = data.map(transformProject).filter(p => p.isAvailable);
+        projectsData = (await fetchProjects()).filter(p => p.isAvailable);
     }
 
     displayStore(projectsData);
@@ -193,7 +123,7 @@ function displayStore(products) {
     container.innerHTML = products.map(product => `
         <div class="glass rounded-3xl overflow-hidden card-hover reveal group h-full flex flex-col">
             <div class="relative">
-                <img src="${product.thumbnail}" class="w-full h-48 object-cover" alt="${product.title}">
+                <img src="${product.thumbnail || `https://via.placeholder.com/600x400/6366f1/ffffff?text=${encodeURIComponent(product.title)}`}" class="w-full h-48 object-cover" alt="${product.title}">
                 ${product.isPopular ? '<div class="absolute top-4 right-4 bg-accent text-white px-3 py-1 rounded-full text-xs font-bold">POPULER</div>' : ''}
             </div>
             <div class="p-6 flex-1 flex flex-col">
@@ -220,7 +150,7 @@ function displayStore(products) {
                             <p class="text-2xl font-bold gradient-text">Rp ${(product.price / 1000).toFixed(0)}K</p>
                             ${product.originalPrice ? `<p class="text-xs text-gray-500 line-through">Rp ${(product.originalPrice / 1000).toFixed(0)}K</p>` : ''}
                         </div>
-                        <button onclick="addToCart('${product.title}', ${product.price})" 
+                        <button onclick="addToCart('${product.title}', ${product.price})"
                                 class="bg-gradient-to-r from-primary to-secondary px-4 py-2 rounded-xl font-semibold hover:shadow-lg transition-all">
                             <i data-lucide="shopping-cart" class="w-4 h-4"></i>
                         </button>
@@ -237,24 +167,23 @@ async function renderArticles() {
     const container = document.getElementById('articles-grid');
     if (!container) return;
 
-    try {
-        const data = await fetchFromAPI('/articles');
-        articlesData = data.map(transformArticle);
-
-        displayArticles(articlesData);
-    } catch (error) {
-        container.innerHTML = '<div class="col-span-full text-center text-gray-400">Failed to load articles</div>';
-    }
+    articlesData = await fetchArticles();
+    displayArticles(articlesData);
 }
 
 function displayArticles(articles) {
     const container = document.getElementById('articles-grid');
 
+    if (articles.length === 0) {
+        container.innerHTML = '<div class="col-span-full text-center text-gray-400 py-12">Belum ada artikel</div>';
+        return;
+    }
+
     container.innerHTML = articles.map(article => `
         <article class="glass rounded-3xl overflow-hidden card-hover reveal group cursor-pointer" onclick="showArticleDetail('${article.slug}')">
             <div class="relative overflow-hidden">
-                <img src="${article.coverImage}" 
-                     class="w-full h-48 object-cover transform group-hover:scale-110 transition-transform duration-500" 
+                <img src="${article.coverImage || `https://via.placeholder.com/600x400/a855f7/ffffff?text=${encodeURIComponent(article.title)}`}"
+                     class="w-full h-48 object-cover transform group-hover:scale-110 transition-transform duration-500"
                      alt="${article.title}" loading="lazy">
                 <div class="absolute top-4 left-4">
                     <span class="px-3 py-1 bg-primary/90 rounded-full text-xs font-medium">${article.category}</span>
@@ -288,11 +217,12 @@ function displayArticles(articles) {
     if (window.lucide) lucide.createIcons();
 }
 
-// Filter Functions
+// ==========================================
+// FILTER FUNCTIONS
+// ==========================================
 function filterProjects(category) {
     currentFilter = category;
 
-    // Update buttons
     document.querySelectorAll('.filter-btn').forEach(btn => {
         if (btn.dataset.filter === category) {
             btn.classList.add('bg-primary', 'text-white');
@@ -303,7 +233,6 @@ function filterProjects(category) {
         }
     });
 
-    // Filter and display
     const filtered = category === 'all'
         ? projectsData
         : projectsData.filter(p => p.category === category);
@@ -311,7 +240,9 @@ function filterProjects(category) {
     displayProjects(filtered);
 }
 
-// Cart Functions
+// ==========================================
+// CART FUNCTIONS
+// ==========================================
 function addToCart(name, price) {
     const existing = cart.find(item => item.name === name);
     if (existing) {
@@ -333,7 +264,6 @@ function updateCartUI() {
     const cartCount = document.getElementById('cart-count');
     const cartTotal = document.getElementById('cart-total');
 
-    // Update count badge
     const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
     if (totalItems > 0) {
         cartCount.textContent = totalItems;
@@ -342,7 +272,6 @@ function updateCartUI() {
         cartCount.classList.add('hidden');
     }
 
-    // Update items
     if (cart.length === 0) {
         cartItems.innerHTML = '<p class="text-gray-400 text-center py-8">Keranjang kosong</p>';
     } else {
@@ -359,7 +288,6 @@ function updateCartUI() {
         `).join('');
     }
 
-    // Update total
     const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     cartTotal.textContent = `Rp ${(total / 1000).toFixed(0)}K`;
 
@@ -384,7 +312,9 @@ function checkout() {
     window.open(`https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${message}`, '_blank');
 }
 
-// UI Functions
+// ==========================================
+// UI FUNCTIONS
+// ==========================================
 function showToast(message) {
     const toast = document.getElementById('toast');
     document.getElementById('toast-message').textContent = message;
@@ -399,7 +329,6 @@ function showProjectDetail(slug) {
     const project = projectsData.find(p => p.slug === slug);
     if (!project) return;
 
-    // Simple modal atau redirect ke detail page
     alert(`Detail Project: ${project.title}\n\n${project.description}\n\nTech: ${project.techStack.join(', ')}`);
 }
 
@@ -416,7 +345,9 @@ function handleSubmit(e) {
     e.target.reset();
 }
 
-// Initialize
+// ==========================================
+// INITIALIZE
+// ==========================================
 document.addEventListener('DOMContentLoaded', () => {
     renderProjects();
     renderStore();

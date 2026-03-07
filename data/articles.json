@@ -1,0 +1,53 @@
+[
+    {
+        "id": 1,
+        "title": "Panduan Lengkap CI/CD dengan GitHub Actions",
+        "slug": "panduan-cicd-github-actions",
+        "excerpt": "Pelajari cara mengotomasi deployment aplikasi Anda menggunakan GitHub Actions dari nol hingga production-ready.",
+        "content": "GitHub Actions adalah fitur powerful dari GitHub yang memungkinkan Anda mengotomasi workflow development...",
+        "coverImage": null,
+        "category": "DevOps",
+        "tags": [
+            "GitHub Actions",
+            "CI/CD",
+            "DevOps"
+        ],
+        "readTime": 8,
+        "views": 1250,
+        "publishedDate": "2026-03-01T00:00:00.000Z"
+    },
+    {
+        "id": 2,
+        "title": "Membangun REST API dengan Node.js dan Express",
+        "slug": "membangun-rest-api-nodejs-express",
+        "excerpt": "Tutorial step-by-step membangun REST API yang scalable menggunakan Node.js, Express, dan best practices industri.",
+        "content": "REST API adalah fondasi dari hampir semua aplikasi web modern. Dalam artikel ini kita akan membangun API dari nol...",
+        "coverImage": null,
+        "category": "Backend",
+        "tags": [
+            "Node.js",
+            "Express",
+            "REST API"
+        ],
+        "readTime": 12,
+        "views": 890,
+        "publishedDate": "2026-02-20T00:00:00.000Z"
+    },
+    {
+        "id": 3,
+        "title": "Tips Optimasi Performa Website 2026",
+        "slug": "tips-optimasi-performa-website-2026",
+        "excerpt": "Kumpulan teknik terbaru untuk mempercepat loading website Anda hingga skor Lighthouse sempurna.",
+        "content": "Performa website adalah faktor krusial dalam user experience dan SEO. Berikut adalah teknik-teknik terbaru...",
+        "coverImage": null,
+        "category": "Web Dev",
+        "tags": [
+            "Performance",
+            "Lighthouse",
+            "Web Vitals"
+        ],
+        "readTime": 6,
+        "views": 2100,
+        "publishedDate": "2026-02-15T00:00:00.000Z"
+    }
+]

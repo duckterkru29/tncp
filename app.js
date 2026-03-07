@@ -1,160 +1,82 @@
-// app.js - Main Application Logic (Static JSON Version - GitHub Pages Ready)
+// app.js - The Logic (Modern UI Edition)
 
 const CONFIG = {
     WHATSAPP_NUMBER: '6281310387659'
 };
 
-// State Management
-let cart = [];
-let currentFilter = 'all';
+// Global Store
 let projectsData = [];
 let articlesData = [];
+let cart = [];
 
 // ==========================================
-// FETCH DATA DARI FILE JSON STATIS
+// CORE DATA LOADING
 // ==========================================
-async function fetchProjects() {
+async function init() {
     try {
-        const response = await fetch('data/projects.json');
-        if (!response.ok) throw new Error('Gagal memuat projects');
-        return await response.json();
-    } catch (error) {
-        console.error('Error loading projects:', error);
-        return [];
+        const [projRes, artRes] = await Promise.all([
+            fetch('data/projects.json'),
+            fetch('data/articles.json')
+        ]);
+
+        projectsData = await projRes.json();
+        articlesData = await artRes.json();
+
+        renderUI();
+        initScrollReveal();
+    } catch (err) {
+        console.error("Critical Error Loading Data:", err);
     }
 }
 
-async function fetchArticles() {
-    try {
-        const response = await fetch('data/articles.json');
-        if (!response.ok) throw new Error('Gagal memuat articles');
-        return await response.json();
-    } catch (error) {
-        console.error('Error loading articles:', error);
-        return [];
-    }
+function renderUI() {
+    renderProjects(projectsData);
+    renderMarketplace(projectsData);
+    renderArticles(articlesData);
 }
 
 // ==========================================
-// RENDER FUNCTIONS
+// PROJECTS RENDERER (PORTFOLIO)
 // ==========================================
-async function renderProjects() {
-    const container = document.getElementById('projects-grid');
-    if (!container) return;
+function renderProjects(data) {
+    const grid = document.getElementById('projects-grid');
+    if (!grid) return;
 
-    projectsData = (await fetchProjects()).filter(p => p.isAvailable);
-    displayProjects(projectsData);
-}
-
-function displayProjects(projects) {
-    const container = document.getElementById('projects-grid');
-
-    if (projects.length === 0) {
-        container.innerHTML = '<div class="col-span-full text-center text-gray-400 py-12">Belum ada project tersedia</div>';
-        return;
-    }
-
-    container.innerHTML = projects.map(project => `
-        <div class="project-card group reveal" data-category="${project.category}">
-            <div class="glass rounded-3xl overflow-hidden card-hover h-full flex flex-col">
-                <div class="relative overflow-hidden">
-                    <img src="${project.thumbnail || `https://via.placeholder.com/600x400/6366f1/ffffff?text=${encodeURIComponent(project.title)}`}"
-                         class="w-full h-56 object-cover transform group-hover:scale-110 transition-transform duration-500"
-                         alt="${project.title}" loading="lazy">
-                    ${project.isPopular ? '<div class="absolute top-4 right-4 bg-accent text-white px-3 py-1 rounded-full text-xs font-bold">POPULAR</div>' : ''}
-                    <div class="absolute inset-0 bg-gradient-to-t from-darker to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-                        <div class="flex gap-2 flex-wrap">
-                            ${project.techStack.slice(0, 3).map(tech =>
-        `<span class="px-3 py-1 bg-primary/80 rounded-full text-xs font-medium">${tech}</span>`
-    ).join('')}
-                        </div>
+    grid.innerHTML = data.map(item => `
+        <div class="glass-card rounded-[32px] overflow-hidden group reveal">
+            <div class="relative aspect-video overflow-hidden">
+                <img src="${item.thumbnail || `https://source.unsplash.com/800x600/?technology,code,${item.id}`}" 
+                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+                     alt="${item.title}">
+                <div class="absolute inset-0 bg-gradient-to-t from-darker via-transparent to-transparent opacity-80"></div>
+                ${item.isPopular ? `
+                    <div class="absolute top-5 right-5 h-8 px-4 bg-accent/90 backdrop-blur-md rounded-full flex items-center gap-2 border border-white/20">
+                        <span class="w-2 h-2 bg-white rounded-full animate-pulse"></span>
+                        <span class="text-[10px] font-black tracking-widest uppercase">Hot Product</span>
                     </div>
-                </div>
-                <div class="p-6 flex-1 flex flex-col">
-                    <div class="flex items-center gap-2 mb-3">
-                        <span class="px-2 py-1 bg-primary/20 text-primary rounded text-xs font-medium uppercase">${project.category}</span>
-                    </div>
-                    <h3 class="font-display text-xl font-bold mb-2">${project.title}</h3>
-                    <p class="text-gray-400 text-sm mb-4 line-clamp-2">${project.description}</p>
-                    
-                    <div class="mt-auto">
-                        <div class="flex justify-between items-center mb-4">
-                            <div>
-                                <p class="text-2xl font-bold gradient-text">Rp ${(project.price / 1000).toFixed(0)}K</p>
-                                ${project.originalPrice ? `<p class="text-xs text-gray-500 line-through">Rp ${(project.originalPrice / 1000).toFixed(0)}K</p>` : ''}
-                            </div>
-                            <span class="text-xs text-gray-400">${project.salesCount} sales</span>
-                        </div>
-
-                        <div class="flex gap-2">
-                            <button onclick="showProjectDetail('${project.slug}')"
-                                    class="flex-1 py-2 rounded-xl glass hover:bg-white/10 transition-colors text-sm font-medium">
-                                Detail
-                            </button>
-                            <button onclick="addToCart('${project.title}', ${project.price})"
-                                    class="flex-1 py-2 rounded-xl bg-gradient-to-r from-primary to-secondary hover:shadow-lg transition-all text-sm font-medium">
-                                Beli
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    `).join('');
-
-    // Re-init observer for new elements
-    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
-}
-
-async function renderStore() {
-    const container = document.getElementById('store-grid');
-    if (!container) return;
-
-    if (projectsData.length === 0) {
-        projectsData = (await fetchProjects()).filter(p => p.isAvailable);
-    }
-
-    displayStore(projectsData);
-}
-
-function displayStore(products) {
-    const container = document.getElementById('store-grid');
-
-    container.innerHTML = products.map(product => `
-        <div class="glass rounded-3xl overflow-hidden card-hover reveal group h-full flex flex-col">
-            <div class="relative">
-                <img src="${product.thumbnail || `https://via.placeholder.com/600x400/6366f1/ffffff?text=${encodeURIComponent(product.title)}`}" class="w-full h-48 object-cover" alt="${product.title}">
-                ${product.isPopular ? '<div class="absolute top-4 right-4 bg-accent text-white px-3 py-1 rounded-full text-xs font-bold">POPULER</div>' : ''}
-            </div>
-            <div class="p-6 flex-1 flex flex-col">
-                <div class="flex items-center gap-2 mb-3">
-                    ${product.techStack.slice(0, 2).map(tech =>
-        `<span class="px-2 py-1 bg-primary/20 text-primary rounded text-xs">${tech}</span>`
+                ` : ''}
+                <div class="absolute bottom-6 left-6 flex gap-2">
+                    ${item.techStack.slice(0, 3).map(tech =>
+        `<span class="px-3 py-1 glass border-white/10 rounded-lg text-[10px] font-bold text-gray-300 uppercase tracking-tighter">${tech}</span>`
     ).join('')}
                 </div>
-                <h3 class="font-display text-xl font-bold mb-2">${product.title}</h3>
-                <p class="text-gray-400 text-sm mb-4 line-clamp-2">${product.description}</p>
-                
-                <div class="space-y-2 mb-4">
-                    ${product.features.slice(0, 3).map(feat => `
-                        <div class="flex items-center gap-2 text-sm text-gray-300">
-                            <i data-lucide="check-circle" class="w-4 h-4 text-primary"></i>
-                            <span>${feat}</span>
-                        </div>
-                    `).join('')}
+            </div>
+            <div class="p-8 space-y-4">
+                <div class="flex items-center gap-2 text-[10px] font-black text-primary tracking-[0.2em] uppercase">
+                    <i data-lucide="tag" class="w-3 h-3"></i> ${item.category}
                 </div>
+                <h3 class="text-2xl font-display font-bold leading-tight group-hover:text-primary transition-colors">${item.title}</h3>
+                <p class="text-gray-500 text-sm line-clamp-2 leading-relaxed">${item.description}</p>
                 
-                <div class="mt-auto pt-4 border-t border-white/10">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-2xl font-bold gradient-text">Rp ${(product.price / 1000).toFixed(0)}K</p>
-                            ${product.originalPrice ? `<p class="text-xs text-gray-500 line-through">Rp ${(product.originalPrice / 1000).toFixed(0)}K</p>` : ''}
-                        </div>
-                        <button onclick="addToCart('${product.title}', ${product.price})"
-                                class="bg-gradient-to-r from-primary to-secondary px-4 py-2 rounded-xl font-semibold hover:shadow-lg transition-all">
-                            <i data-lucide="shopping-cart" class="w-4 h-4"></i>
-                        </button>
+                <div class="flex items-center justify-between pt-6 border-t border-white/5">
+                    <div class="space-y-1">
+                        <div class="text-sm text-gray-500 line-through decoration-accent/50 opacity-50">Rp ${(item.originalPrice / 1000).toFixed(0)}K</div>
+                        <div class="text-2xl font-display font-black text-white">Rp ${(item.price / 1000).toFixed(0)}K</div>
                     </div>
+                    <button onclick="addToCart('${item.title}', ${item.price}, '${item.thumbnail}')" 
+                            class="p-4 bg-white/5 hover:bg-primary rounded-2xl transition-all group/btn">
+                        <i data-lucide="shopping-cart" class="w-6 h-6 text-white group-hover/btn:scale-110 transition-transform"></i>
+                    </button>
                 </div>
             </div>
         </div>
@@ -163,53 +85,52 @@ function displayStore(products) {
     if (window.lucide) lucide.createIcons();
 }
 
-async function renderArticles() {
-    const container = document.getElementById('articles-grid');
-    if (!container) return;
+// ==========================================
+// STORE RENDERER (MARKETPLACE)
+// ==========================================
+function renderMarketplace(data) {
+    const grid = document.getElementById('store-grid');
+    if (!grid) return;
 
-    articlesData = await fetchArticles();
-    displayArticles(articlesData);
+    // Show only 4 newest/popular items in CTA section
+    grid.innerHTML = data.slice(0, 4).map(item => `
+        <div class="glass p-5 rounded-3xl space-y-4 hover:border-primary/50 transition-colors">
+            <div class="aspect-square rounded-2xl overflow-hidden">
+                <img src="${item.thumbnail || `https://source.unsplash.com/400x400/?software,app,${item.id}`}" class="w-full h-full object-cover">
+            </div>
+            <div class="text-left">
+                <h4 class="font-bold text-sm line-clamp-1">${item.title}</h4>
+                <p class="text-primary font-black mt-1">Rp ${(item.price / 1000).toFixed(0)}K</p>
+            </div>
+        </div>
+    `).join('');
 }
 
-function displayArticles(articles) {
-    const container = document.getElementById('articles-grid');
+// ==========================================
+// ARTICLES RENDERER
+// ==========================================
+function renderArticles(data) {
+    const grid = document.getElementById('articles-grid');
+    if (!grid) return;
 
-    if (articles.length === 0) {
-        container.innerHTML = '<div class="col-span-full text-center text-gray-400 py-12">Belum ada artikel</div>';
-        return;
-    }
-
-    container.innerHTML = articles.map(article => `
-        <article class="glass rounded-3xl overflow-hidden card-hover reveal group cursor-pointer" onclick="showArticleDetail('${article.slug}')">
-            <div class="relative overflow-hidden">
-                <img src="${article.coverImage || `https://via.placeholder.com/600x400/a855f7/ffffff?text=${encodeURIComponent(article.title)}`}"
-                     class="w-full h-48 object-cover transform group-hover:scale-110 transition-transform duration-500"
-                     alt="${article.title}" loading="lazy">
-                <div class="absolute top-4 left-4">
-                    <span class="px-3 py-1 bg-primary/90 rounded-full text-xs font-medium">${article.category}</span>
+    grid.innerHTML = data.map(art => `
+        <article class="group cursor-pointer reveal" onclick="window.alert('Viewing: ${art.title}')">
+            <div class="glass-card rounded-[32px] overflow-hidden">
+                <div class="relative h-56 overflow-hidden">
+                    <img src="${art.coverImage || `https://source.unsplash.com/800x600/?tech,it,${art.id}`}" 
+                         class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700">
+                    <div class="absolute top-6 left-6">
+                        <span class="px-4 py-1.5 bg-dark/80 backdrop-blur-md rounded-full text-[10px] font-black uppercase tracking-widest border border-white/10">${art.category}</span>
+                    </div>
                 </div>
-            </div>
-            <div class="p-6">
-                <div class="flex items-center gap-4 text-sm text-gray-400 mb-3">
-                    <span class="flex items-center gap-1">
-                        <i data-lucide="calendar" class="w-4 h-4"></i>
-                        ${new Date(article.publishedDate).toLocaleDateString('id-ID')}
-                    </span>
-                    <span class="flex items-center gap-1">
-                        <i data-lucide="clock" class="w-4 h-4"></i>
-                        ${article.readTime} min
-                    </span>
+                <div class="p-8 space-y-4">
+                    <div class="flex items-center gap-4 text-[10px] font-bold text-gray-500 uppercase tracking-widest">
+                        <span><i data-lucide="calendar" class="inline w-3 h-3 mr-1"></i> ${new Date(art.publishedDate).toLocaleDateString()}</span>
+                        <span><i data-lucide="clock" class="inline w-3 h-3 mr-1"></i> ${art.readTime} MIN READ</span>
+                    </div>
+                    <h3 class="text-xl font-display font-bold leading-tight group-hover:text-primary transition-colors">${art.title}</h3>
+                    <p class="text-gray-500 text-sm line-clamp-3">${art.excerpt}</p>
                 </div>
-                <h3 class="font-display text-xl font-bold mb-3 group-hover:text-primary transition-colors line-clamp-2">${article.title}</h3>
-                <p class="text-gray-400 text-sm mb-4 line-clamp-2">${article.excerpt}</p>
-                <div class="flex flex-wrap gap-2 mb-4">
-                    ${article.tags.slice(0, 3).map(tag =>
-        `<span class="px-2 py-1 bg-white/5 rounded text-xs text-gray-400">#${tag}</span>`
-    ).join('')}
-                </div>
-                <span class="text-primary text-sm font-semibold flex items-center gap-1 group-hover:gap-2 transition-all">
-                    Baca Selengkapnya <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
-                </span>
             </div>
         </article>
     `).join('');
@@ -218,18 +139,17 @@ function displayArticles(articles) {
 }
 
 // ==========================================
-// FILTER FUNCTIONS
+// FILTRATION
 // ==========================================
-function filterProjects(category) {
-    currentFilter = category;
-
+window.filterProjects = (category) => {
+    // Update active button
     document.querySelectorAll('.filter-btn').forEach(btn => {
         if (btn.dataset.filter === category) {
-            btn.classList.add('bg-primary', 'text-white');
-            btn.classList.remove('glass');
+            btn.classList.add('bg-white', 'text-darker');
+            btn.classList.remove('text-gray-400');
         } else {
-            btn.classList.remove('bg-primary', 'text-white');
-            btn.classList.add('glass');
+            btn.classList.remove('bg-white', 'text-darker');
+            btn.classList.add('text-gray-400');
         }
     });
 
@@ -237,119 +157,101 @@ function filterProjects(category) {
         ? projectsData
         : projectsData.filter(p => p.category === category);
 
-    displayProjects(filtered);
-}
+    renderProjects(filtered);
+};
 
 // ==========================================
-// CART FUNCTIONS
+// CART LOGIC
 // ==========================================
-function addToCart(name, price) {
-    const existing = cart.find(item => item.name === name);
+window.addToCart = (title, price, img) => {
+    const existing = cart.find(i => i.title === title);
     if (existing) {
-        existing.quantity++;
+        existing.qty++;
     } else {
-        cart.push({ name, price, quantity: 1 });
+        cart.push({ title, price, img, qty: 1 });
     }
-    updateCartUI();
-    showToast(`${name} ditambahkan ke keranjang`);
-}
+    updateCart();
+    showToast(`Berhasil menambahkan ${title}`);
+};
 
-function removeFromCart(index) {
-    cart.splice(index, 1);
-    updateCartUI();
-}
+function updateCart() {
+    const container = document.getElementById('cart-items');
+    const totalEl = document.getElementById('cart-total');
+    const badge = document.getElementById('cart-count');
 
-function updateCartUI() {
-    const cartItems = document.getElementById('cart-items');
-    const cartCount = document.getElementById('cart-count');
-    const cartTotal = document.getElementById('cart-total');
-
-    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-    if (totalItems > 0) {
-        cartCount.textContent = totalItems;
-        cartCount.classList.remove('hidden');
-    } else {
-        cartCount.classList.add('hidden');
-    }
+    badge.innerText = cart.reduce((a, b) => a + b.qty, 0);
+    badge.classList.toggle('hidden', cart.length === 0);
 
     if (cart.length === 0) {
-        cartItems.innerHTML = '<p class="text-gray-400 text-center py-8">Keranjang kosong</p>';
+        container.innerHTML = `
+            <div class="flex flex-col items-center justify-center h-64 opacity-20">
+                <i data-lucide="shopping-basket" class="w-20 h-20 mb-4"></i>
+                <p class="font-bold">Keranjang Kosong</p>
+            </div>
+        `;
     } else {
-        cartItems.innerHTML = cart.map((item, index) => `
-            <div class="glass rounded-xl p-4 flex justify-between items-center">
-                <div>
-                    <h4 class="font-semibold text-sm">${item.name}</h4>
-                    <p class="text-primary text-sm">Rp ${(item.price / 1000).toFixed(0)}K x ${item.quantity}</p>
+        container.innerHTML = cart.map((item, idx) => `
+            <div class="flex items-center gap-4 group">
+                <div class="w-20 h-20 glass rounded-2xl overflow-hidden shrink-0">
+                    <img src="${item.img || 'https://via.placeholder.com/80'}" class="w-full h-full object-cover">
                 </div>
-                <button onclick="removeFromCart(${index})" class="p-2 hover:bg-red-500/20 text-red-400 rounded-lg transition-colors">
+                <div class="flex-1 space-y-1">
+                    <h4 class="font-bold text-sm leading-tight">${item.title}</h4>
+                    <p class="text-xs text-gray-500">${item.qty} x Rp ${(item.price / 1000).toFixed(0)}K</p>
+                </div>
+                <button onclick="removeFromCart(${idx})" class="p-2 hover:bg-accent/10 hover:text-accent transition-colors rounded-lg">
                     <i data-lucide="trash-2" class="w-4 h-4"></i>
                 </button>
             </div>
         `).join('');
     }
 
-    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    cartTotal.textContent = `Rp ${(total / 1000).toFixed(0)}K`;
+    const total = cart.reduce((a, b) => a + (b.price * b.qty), 0);
+    totalEl.innerText = `Rp ${(total / 1000).toFixed(0)}K`;
 
     if (window.lucide) lucide.createIcons();
 }
 
-function toggleCart() {
+window.removeFromCart = (idx) => {
+    cart.splice(idx, 1);
+    updateCart();
+};
+
+window.toggleCart = () => {
     document.getElementById('cart-sidebar').classList.toggle('translate-x-full');
-}
+};
 
-function checkout() {
-    if (cart.length === 0) {
-        showToast('Keranjang masih kosong!');
-        return;
-    }
+window.checkout = () => {
+    if (cart.length === 0) return showToast("Keranjang Anda masih kosong!");
 
-    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    const itemsList = cart.map(item => `- ${item.name} (${item.quantity}x)`).join('%0A');
+    const items = cart.map(i => `\n- ${i.title} (${i.qty}x)`).join('');
+    const total = cart.reduce((a, b) => a + (b.price * b.qty), 0);
+    const msg = `Halo TNCP! Saya ingin membeli produk berikut:${items}\n\nTotal Estimasi: Rp ${total.toLocaleString('id-ID')}\n\nMohon diproses, terima kasih.`;
 
-    const message = `Halo, saya ingin membeli source code:%0A%0A${itemsList}%0A%0ATotal: Rp ${total.toLocaleString()}%0A%0AMohon informasi pembayaran.`;
-
-    window.open(`https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${message}`, '_blank');
-}
+    window.open(`https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
+};
 
 // ==========================================
-// UI FUNCTIONS
+// UTILS
 // ==========================================
-function showToast(message) {
+function showToast(msg) {
     const toast = document.getElementById('toast');
-    document.getElementById('toast-message').textContent = message;
-    toast.classList.remove('translate-y-20', 'opacity-0');
-
-    setTimeout(() => {
-        toast.classList.add('translate-y-20', 'opacity-0');
-    }, 3000);
+    document.getElementById('toast-message').innerText = msg;
+    toast.classList.remove('translate-y-32', 'opacity-0');
+    setTimeout(() => toast.classList.add('translate-y-32', 'opacity-0'), 3000);
 }
 
-function showProjectDetail(slug) {
-    const project = projectsData.find(p => p.slug === slug);
-    if (!project) return;
+function initScrollReveal() {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, { threshold: 0.1 });
 
-    alert(`Detail Project: ${project.title}\n\n${project.description}\n\nTech: ${project.techStack.join(', ')}`);
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 }
 
-function showArticleDetail(slug) {
-    const article = articlesData.find(a => a.slug === slug);
-    if (!article) return;
-
-    alert(`Artikel: ${article.title}\n\n${article.excerpt}`);
-}
-
-function handleSubmit(e) {
-    e.preventDefault();
-    showToast('Pesan berhasil dikirim! Saya akan menghubungi Anda segera.');
-    e.target.reset();
-}
-
-// ==========================================
-// INITIALIZE
-// ==========================================
-document.addEventListener('DOMContentLoaded', () => {
-    renderProjects();
-    renderStore();
-    renderArticles();
-});
+// Start
+document.addEventListener('DOMContentLoaded', init);

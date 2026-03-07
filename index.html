@@ -18,6 +18,8 @@
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/highlightjs-line-numbers.js/dist/highlightjs-line-numbers.min.js"></script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link
@@ -149,6 +151,34 @@
 
         .animate-float {
             animation: float 6s ease-in-out infinite;
+        }
+    </style>
+    <style>
+        /* Custom Code Styling (Highlight.js Line Numbers) */
+        .hljs-ln-numbers {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            text-align: center;
+            color: #4b5563;
+            /* grey-600 */
+            border-right: 1px solid #1e293b;
+            vertical-align: top;
+            padding-right: 15px !important;
+            width: 30px;
+        }
+
+        .hljs-ln-code {
+            padding-left: 15px !important;
+        }
+
+        pre code {
+            border-radius: 12px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
         }
     </style>
 </head>

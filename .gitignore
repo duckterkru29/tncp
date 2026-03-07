@@ -4,3 +4,4 @@ package.json
 server.js
 views/
 public/
+.env

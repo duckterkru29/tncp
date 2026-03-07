@@ -90,6 +90,34 @@ function renderProjects(data) {
 }
 
 // ==========================================
+// PORTFOLIO FILTERING
+// ==========================================
+window.filterProjects = (category) => {
+    // Update active button UI
+    const buttons = document.querySelectorAll('.filter-btn');
+    buttons.forEach(btn => {
+        if (btn.getAttribute('data-filter') === category) {
+            btn.classList.add('bg-white', 'text-darker');
+            btn.classList.remove('text-gray-400', 'hover:text-white');
+        } else {
+            btn.classList.remove('bg-white', 'text-darker');
+            btn.classList.add('text-gray-400', 'hover:text-white');
+        }
+    });
+
+    // Filter Logic
+    if (category === 'all') {
+        renderProjects(projectsData);
+    } else {
+        const filtered = projectsData.filter(p => p.category.toLowerCase() === category.toLowerCase());
+        renderProjects(filtered);
+    }
+
+    // Track Filter Action
+    trackAction('filter_portfolio', `User filter portfolio ke: ${category}`);
+};
+
+// ==========================================
 // STORE RENDERER (MARKETPLACE)
 // ==========================================
 function renderMarketplace(data) {
@@ -324,6 +352,15 @@ async function trackAction(action, details = '') {
             body: JSON.stringify({ action, details })
         });
     } catch (e) {
-        console.warn("Tracker offline.");
+        // console.warn("Tracker offline.");
     }
 }
+
+// ==========================================
+// CONTACT HELPERS
+// ==========================================
+window.openWhatsApp = () => {
+    const msg = `Halo ${settingsData.name || 'Admin'}! Saya tertarik untuk bekerja sama atau bertanya tentang layanan Anda.`;
+    window.open(`https://wa.me/${settingsData.whatsapp || '6281310387659'}?text=${encodeURIComponent(msg)}`, '_blank');
+    trackAction('order', 'User klik Let\'s Talk via Hero/Navbar');
+};

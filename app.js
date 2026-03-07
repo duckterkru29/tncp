@@ -77,7 +77,7 @@ function renderProjects(data) {
                         <div class="text-sm text-gray-500 line-through decoration-accent/50 opacity-50">Rp ${(item.originalPrice / 1000).toFixed(0)}K</div>
                         <div class="text-2xl font-display font-black text-white">Rp ${(item.price / 1000).toFixed(0)}K</div>
                     </div>
-                    <button onclick="addToCart('${item.title}', ${item.price}, './uploads/${item.thumbnail}')" 
+                    <button onclick="addToCart('${item.title}', ${item.price}, './uploads/${item.thumbnail}', ${item.id})" 
                             class="p-4 bg-white/5 hover:bg-primary rounded-2xl transition-all group/btn">
                         <i data-lucide="shopping-cart" class="w-6 h-6 text-white group-hover/btn:scale-110 transition-transform"></i>
                     </button>
@@ -137,7 +137,7 @@ function renderMarketplace(data) {
                 <h4 class="font-bold text-sm line-clamp-1">${item.title}</h4>
                 <div class="flex justify-between items-center mt-2">
                     <span class="text-accent font-black text-sm">Rp ${(item.price / 1000).toFixed(0)}K</span>
-                    <button onclick="addToCart('${item.title}', ${item.price}, './uploads/${item.thumbnail}')" class="text-primary hover:text-white"><i data-lucide="plus-circle" class="w-5 h-5"></i></button>
+                    <button onclick="addToCart('${item.title}', ${item.price}, './uploads/${item.thumbnail}', ${item.id})" class="text-primary hover:text-white"><i data-lucide="plus-circle" class="w-5 h-5"></i></button>
                 </div>
             </div>
         </div>
@@ -189,12 +189,12 @@ function renderArticles(data) {
 // ==========================================
 // CART LOGIC
 // ==========================================
-window.addToCart = (title, price, img) => {
+window.addToCart = (title, price, img, id) => {
     const existing = cart.find(i => i.title === title);
     if (existing) {
         existing.qty++;
     } else {
-        cart.push({ title, price, img, qty: 1 });
+        cart.push({ id, title, price, img, qty: 1 });
     }
     updateCart();
     showToast(`Berhasil menambahkan ${title}`);
@@ -257,7 +257,7 @@ window.checkout = () => {
     window.open(`https://wa.me/${settingsData.whatsapp || '6281310387659'}?text=${encodeURIComponent(msg)}`, '_blank');
 
     // Track Checkout Order
-    trackAction('order', `User klik checkout via WA untuk ${cart.length} item.`);
+    trackAction('order', `User klik checkout via WA untuk ${cart.length} item.`, cart.length === 1 ? cart[0].id : null);
 };
 
 // ==========================================
@@ -334,7 +334,7 @@ window.viewArticle = (id) => {
     }, 10);
 
     // Track Article View
-    trackAction('read_article', `Membaca: ${art.title}`);
+    trackAction('read_article', `Membaca: ${art.title}`, art.id);
 };
 
 window.closeArticle = () => {
@@ -350,12 +350,12 @@ window.closeArticle = () => {
 // ==========================================
 // TRACKING SYSTEM
 // ==========================================
-async function trackAction(action, details = '') {
+async function trackAction(action, details = '', id = null) {
     try {
         await fetch('/api/stats/track', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ action, details })
+            body: JSON.stringify({ action, details, id })
         });
     } catch (e) {
         // console.warn("Tracker offline.");

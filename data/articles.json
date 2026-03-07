@@ -4,12 +4,38 @@
     "title": "Cek Penggunaan Bandwidth Pada Server Linux",
     "slug": "cek-penggunaan-bandwidth-pada-server-linux",
     "excerpt": "",
-    "content": "Instal package vnstat pada linux:\r\n\r\nRHEL/Centos\r\n\r\nyum install vnstat\r\nDebian/Ubuntu\r\n\r\napt-get install vnstat\r\nUntuk Menggunakannya:\r\n\r\nvnstat\r\nDan akan menampilkan output RX/TX/Total/Estimated seperti di cover\r\n\r\nKeterangan:\r\nRX = Transfer bandwidth masuk (Download)\r\nTX = Transfer bandwidth keluar (Upload)\r\nTotal = Keseluruhan bandwidth TX/RX\r\nEstimated = Perkiraan pemakaian bandwidth dari awal bulan sampai saat ini",
+    "content": "Instal package vnstat pada linux:\r\n\r\nRHEL/Centos\r\n```javascript\r\nyum install vnstat\r\n```\r\n\r\nDebian/Ubuntu\r\n```javascript\r\napt-get install vnstat\r\n```\r\n\r\nUntuk Menggunakannya:\r\n```javascript\r\nvnstat\r\n```\r\n\r\nDan akan menampilkan output RX/TX/Total/Estimated seperti di cover\r\n\r\nKeterangan:\r\n* RX = Transfer bandwidth masuk (Download)\r\n* TX = Transfer bandwidth keluar (Upload)\r\n* Total = Keseluruhan bandwidth TX/RX\r\n* Estimated = Perkiraan pemakaian bandwidth dari awal bulan sampai saat ini",
     "category": "TIPS",
     "tags": [],
     "coverImage": "1772915711454-393466643.png",
     "readTime": 5,
     "views": 0,
     "publishedDate": "2026-03-07T20:35:11.456Z"
+  },
+  {
+    "id": 1772916346449,
+    "title": "Scan Backdoor Pada Sistem Linux Atau Windows",
+    "slug": "scan-backdoor-pada-sistem-linux-atau-windows",
+    "excerpt": "",
+    "content": "Linux:\r\n```javascript\r\ngrep -RPn \"(passthru|shell_exec|system|phpinfo|base64_decode|chmod|mkdir|fopen|fclose|readfile) *\\(\" / &gt; /directory_tujuan/nama_file_input_hasil_scan.txt\r\n```\r\n\r\nWindows:\r\n```javascript\r\nfindstr /r /s /n \"passthru shell_exec system( phpinfo base64_decode chmod mkdir fopen fclose readfile\" *.*\r\n```\r\n",
+    "category": "TIPS",
+    "tags": [],
+    "coverImage": "1772916346443-328162239.webp",
+    "readTime": 5,
+    "views": 0,
+    "publishedDate": "2026-03-07T20:45:46.449Z"
+  },
+  {
+    "id": 1772916730725,
+    "title": "Keamanan Untuk Web Aplikasi Pada Web Server",
+    "slug": "keamanan-untuk-web-aplikasi-pada-web-server",
+    "excerpt": "",
+    "content": "Security Headers\r\n```javascript\r\nserver_tokens off;\r\nadd_header Strict-Transport-Security 'max-age=31536000; includeSubDomains; preload';\r\nadd_header Content-Security-Policy \"default-src * 'unsafe-inline'; img-src * data:*\";\r\nadd_header X-XSS-Protection \"1; mode=block\";\r\nadd_header X-Frame-Options \"SAMEORIGIN\";\r\nadd_header X-Content-Type-Options nosniff;\r\nadd_header Referrer-Policy \"strict-origin\";\r\nadd_header Permissions-Policy \"geolocation=(),midi=(),sync-xhr=(),microphone=(),camera=(),magnetometer=(),gyroscope=(),fullscreen=(self),payment=()\";\r\n```\r\n\r\nBlock SQL injections\r\n```javascript\r\nset $block_sql_injections 0;\r\nif ($query_string ~ \"union.*select.*\\(\") {set $block_sql_injections 1;}\r\nif ($query_string ~ \"union.*all.*select.*\") {set $block_sql_injections 1;}\r\nif ($query_string ~ \"concat.*\\(\") {set $block_sql_injections 1;}\r\nif ($block_sql_injections = 1) {return 403;}\r\n```\r\n\r\nBlock file injections\r\n```javascript\r\nset $block_file_injections 0;\r\nif ($query_string ~ \"[a-zA-Z0-9_]=http://\") {set $block_file_injections 1;}\r\nif ($query_string ~ \"[a-zA-Z0-9_]=(\\.\\.//?)+\") {set $block_file_injections 1;}\r\nif ($query_string ~ \"[a-zA-Z0-9_]=/([a-z0-9_.]//?)+\") {set $block_file_injections 1;}\r\nif ($block_file_injections = 1) {return 403;}\r\n```\r\n\r\nBlock common exploits\r\n```javascript\r\nset $block_common_exploits 0;\r\nif ($query_string ~ \"(&lt;|%3C).*script.*(&gt;|%3E)\") {set $block_common_exploits 1;}\r\nif ($query_string ~ \"GLOBALS(=|\\[|\\%[0-9A-Z]{0,2})\") {set $block_common_exploits 1;}\r\nif ($query_string ~ \"_REQUEST(=|\\[|\\%[0-9A-Z]{0,2})\") {set $block_common_exploits 1;}\r\nif ($query_string ~ \"proc/self/environ\") {set $block_common_exploits 1;}\r\nif ($query_string ~ \"mosConfig_[a-zA-Z_]{1,21}(=|\\%3D)\") {set $block_common_exploits 1;}\r\nif ($query_string ~ \"base64_(en|de)code\\(.*\\)\") {set $block_common_exploits 1;}\r\nif ($block_common_exploits = 1) {return 403;}\r\n```\r\n\r\nBlock spam\r\n```javascript\r\nset $block_spam 0;\r\nif ($query_string ~ \"\\b(ultram|unicauca|valium|viagra|vicodin|xanax|ypxaieo)\\b\") {set $block_spam 1;}\r\nif ($query_string ~ \"\\b(erections|hoodia|huronriveracres|impotence|levitra|libido)\\b\") {set $block_spam 1;}\r\nif ($query_string ~ \"\\b(ambien|blue\\spill|cialis|cocaine|ejaculation|erectile)\\b\") {set $block_spam 1;}\r\nif ($query_string ~ \"\\b(lipitor|phentermin|pro[sz]ac|sandyauer|tramadol|troyhamby)\\b\") {set $block_spam 1;}\r\nif ($block_spam = 1) {return 403;}\r\n```\r\n\r\nBlock user agents\r\n```javascript\r\nset $block_user_agents 0;\r\n# Don't disable wget if you need it to run cron jobs!\r\n#if ($http_user_agent ~ \"Wget\") {\r\n#    set $block_user_agents 1;\r\n#}\r\n```\r\n\r\nDisable Akeeba Remote Control 2.5 and earlier\r\n```javascript\r\nif ($http_user_agent ~ \"Indy Library\") {set $block_user_agents 1;}\r\n```\r\n\r\nCommon bandwidth hoggers and hacking tools\r\n```javascript\r\nif ($http_user_agent ~ \"libwww-perl\") {set $block_user_agents 1;}\r\nif ($http_user_agent ~ \"GetRight\") {set $block_user_agents 1;}\r\nif ($http_user_agent ~ \"GetWeb!\") {set $block_user_agents 1;}\r\nif ($http_user_agent ~ \"Go!Zilla\") {set $block_user_agents 1;}\r\nif ($http_user_agent ~ \"Download Demon\") {set $block_user_agents 1;}\r\nif ($http_user_agent ~ \"Go-Ahead-Got-It\") {set $block_user_agents 1;}\r\nif ($http_user_agent ~ \"TurnitinBot\") {set $block_user_agents 1;}\r\nif ($http_user_agent ~ \"GrabNet\") {set $block_user_agents 1;}\r\n```\r\n",
+    "category": "TIPS",
+    "tags": [],
+    "coverImage": "1772916730724-705920017.png",
+    "readTime": 5,
+    "views": 0,
+    "publishedDate": "2026-03-07T20:52:10.726Z"
   }
 ]

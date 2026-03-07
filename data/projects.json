@@ -5,7 +5,7 @@
     "slug": "quran-bersama",
     "description": "Sebuah aplikasi Al-Quran digital berbasis web yang dirancang untuk memudahkan pengguna membaca, mempelajari, dan berinteraksi dengan Al-Quran secara mandiri maupun bersama-sama (komunal). Fokus utamanya adalah aksesibilitas dan kemudahan navigasi bagi pengguna Muslim di platform digital.\r\n\r\nTarget Pengguna: Individu yang ingin membaca Al-Quran di perangkat mobile/desktop, komunitas pengajian, dan pelajar agama.",
     "category": "web",
-    "price": 500000,
+    "price": 50000,
     "originalPrice": 1500000,
     "isAvailable": true,
     "isPopular": true,
@@ -29,8 +29,9 @@
       "Informasi detail surat (tempat turunnya surat, jumlah ayat, dan arti nama surat).",
       "Salin (copy) ayat dan terjemahan untuk dibagikan ke media sosial."
     ],
-    "thumbnail": "1772914922804-346221544.png",
-    "salesCount": 0
+    "thumbnail": "1772923326277-819807369.png",
+    "salesCount": 0,
+    "interestCount": 0
   },
   {
     "id": 1772915497707,
@@ -38,7 +39,7 @@
     "slug": "fintrack",
     "description": "Sebuah aplikasi manajemen keuangan pribadi (Personal Finance Manager) berbasis web yang dirancang untuk membantu pengguna mencatat pemasukan, pengeluaran, serta menganalisis kesehatan finansial melalui visualisasi data dan teknologi AI.\r\n\r\nTarget Pengguna: Individu yang ingin mengelola anggaran bulanan, UMKM kecil untuk pencatatan arus kas sederhana, dan pengguna yang membutuhkan asisten keuangan pintar.",
     "category": "web",
-    "price": 350000,
+    "price": 35000,
     "originalPrice": 750000,
     "isAvailable": true,
     "isPopular": false,
@@ -61,7 +62,108 @@
       "Mode tampilan gelap (Dark Mode) dan terang (Light Mode).",
       "Ekspor laporan keuangan ke format PDF atau Excel (CSV)."
     ],
-    "thumbnail": "1772915497697-624684673.png",
-    "salesCount": 0
+    "thumbnail": "1772923217467-40603944.png",
+    "salesCount": 0,
+    "interestCount": 0
+  },
+  {
+    "id": 1772923201474,
+    "title": "Portfolio",
+    "slug": "portfolio",
+    "description": "Sebuah platform berbasis web yang berfungsi sebagai wadah untuk berbagi source code, dokumentasi proyek, atau kumpulan tools pemrograman yang dapat diakses secara terbuka. Proyek ini bertujuan untuk membangun ekosistem di mana pengembang dapat memamerkan karya mereka dengan antarmuka yang modern dan interaktif.\r\n\r\nTarget Pengguna: Pengembang perangkat lunak, pelajar IT, dan komunitas open-source",
+    "category": "web",
+    "price": 25000,
+    "originalPrice": 500000,
+    "isAvailable": true,
+    "isPopular": false,
+    "techStack": [
+      "React.js (dengan Vite)",
+      "Tailwind CSS",
+      "Lucide React atau FontAwesome",
+      "Shadcn UI atau Aceternity UI"
+    ],
+    "features": [
+      "Antarmuka pengguna (UI) dengan tema Dark Mode yang futuristik.",
+      "Katalog proyek atau source code yang terorganisir berdasarkan kategori.",
+      "Integrasi langsung dengan repositori GitHub untuk sinkronisasi data.",
+      "Efek animasi transisi halus pada setiap elemen halaman.",
+      "Fitur pencarian cepat untuk menemukan tools atau kode tertentu.",
+      "Tampilan responsif yang optimal untuk perangkat mobile dan desktop.",
+      "Pratinjau langsung (Live Preview) untuk proyek-proyek web yang ditampilkan.",
+      "Dokumentasi teknis yang bersih dan mudah dibaca.",
+      "Tombol akses cepat ke media sosial atau kontak pengembang.",
+      "Sistem navigasi satu halaman (Single Page Application) yang mulus."
+    ],
+    "thumbnail": "1772923201466-491493035.png",
+    "salesCount": 0,
+    "interestCount": 0
+  },
+  {
+    "id": 1772923756199,
+    "title": "Reservasi",
+    "slug": "reservasi",
+    "description": "Platform digital resmi yang berfungsi untuk mengelola penyewaan dan reservasi fasilitas negara secara transparan, akuntabel, dan modern. Aplikasi ini memungkinkan masyarakat umum atau instansi untuk meminjam sarana prasarana seperti aula, ruang kelas, hingga lapangan olahraga.\r\n\r\nTarget Pengguna: Instansi pemerintah, organisasi kemasyarakatan, komunitas olahraga, dan masyarakat umum yang membutuhkan tempat untuk acara kedinasan maupun non-kedinasan",
+    "category": "web",
+    "price": 500000,
+    "originalPrice": 15000000,
+    "isAvailable": true,
+    "isPopular": false,
+    "techStack": [
+      "Laravel atau CodeIgniter",
+      "Bootstrap",
+      "jQuery",
+      "MySQL atau PostgreSQL",
+      ""
+    ],
+    "features": [
+      "Dashboard informatif yang menampilkan profil dan visi misi BDK Jakarta.",
+      "Katalog fasilitas lengkap (Aula, Ruang Kelas, Mini Soccer, Gym, Ruang Makan).",
+      "Sistem pengecekan ketersediaan fasilitas secara real-time.",
+      "Informasi detail tipe fasilitas (luas ruangan, kapasitas AC, sound system, dll).",
+      "Sistem reservasi mandiri bagi pengguna terdaftar.",
+      "Daftar harga sewa transparan yang tertera langsung pada detail ruangan.",
+      "Manajemen akun pengguna (Login & Registrasi).",
+      "Manajemen daftar kamar dan ploting peserta untuk kegiatan diklat.",
+      "Sistem manajemen bukti reservasi resmi untuk keperluan administrasi.",
+      "Integrasi peta lokasi fasilitas melalui Google Maps API."
+    ],
+    "thumbnail": "1772923756191-411142313.png",
+    "salesCount": 0,
+    "interestCount": 0
+  },
+  {
+    "id": 1772924292186,
+    "title": "Ticketing",
+    "slug": "ticketing",
+    "description": "Platform manajemen layanan Teknologi Informasi (IT Helpdesk) dan sarana prasarana yang berfungsi untuk menampung, melacak, dan menyelesaikan keluhan serta gangguan teknis di lingkungan kantor. Sistem ini memastikan setiap laporan memiliki nomor tiket yang jelas dan progres penyelesaian yang terukur (SLA).\r\n\r\nTarget Pengguna: Pegawai BDK Jakarta (sebagai pelapor), Tim IT/Teknisi (sebagai eksekutor), dan Pimpinan (sebagai pengawas performa layanan).",
+    "category": "web",
+    "price": 350000,
+    "originalPrice": 7500000,
+    "isAvailable": true,
+    "isPopular": false,
+    "techStack": [
+      "Laravel (PHP)",
+      "AdminLTE atau CoreUI",
+      "MySQL atau MariaDB",
+      "DataTables",
+      "Chart.js",
+      "SweetAlert",
+      "Laravel Auth"
+    ],
+    "features": [
+      "Dashboard statistik jumlah laporan (Pending, Process, Closed).",
+      "Sistem Ticketing otomatis untuk setiap pengaduan masuk.",
+      "Formulir input pengaduan berdasarkan kategori gangguan (IT, Sarana, Prasarana).",
+      "Fitur unggah bukti foto atau dokumen pendukung gangguan.",
+      "Manajemen status laporan yang diperbarui secara real-time oleh teknisi.",
+      "Log aktivitas (Audit Trail) untuk melihat riwayat penanganan tiket.",
+      "Sistem manajemen user dengan tingkatan akses (Admin, Teknisi, Pegawai).",
+      "Grafik tren pengaduan bulanan untuk evaluasi kinerja unit.",
+      "Export data laporan pengaduan ke format Excel atau PDF.",
+      "Notifikasi email atau sistem peringatan untuk tiket yang belum ditangani (SLA)."
+    ],
+    "thumbnail": "1772924292184-194951956.png",
+    "salesCount": 0,
+    "interestCount": 0
   }
 ]

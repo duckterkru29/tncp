@@ -1,0 +1,151 @@
+{
+  "visits": 16,
+  "orders": 5,
+  "articleViews": 3,
+  "logs": [
+    {
+      "action": "visit",
+      "details": "Home Page",
+      "time": "2026-03-07T23:03:32.502Z",
+      "ip": "::1"
+    },
+    {
+      "action": "visit",
+      "details": "Home Page",
+      "time": "2026-03-07T23:02:44.100Z",
+      "ip": "::1"
+    },
+    {
+      "action": "visit",
+      "details": "Home Page",
+      "time": "2026-03-07T23:02:35.078Z",
+      "ip": "::1"
+    },
+    {
+      "action": "visit",
+      "details": "Home Page",
+      "time": "2026-03-07T22:59:01.219Z",
+      "ip": "::1"
+    },
+    {
+      "action": "visit",
+      "details": "Home Page",
+      "time": "2026-03-07T22:51:01.571Z",
+      "ip": "::1"
+    },
+    {
+      "action": "visit",
+      "details": "Home Page",
+      "time": "2026-03-07T22:50:02.220Z",
+      "ip": "::1"
+    },
+    {
+      "action": "visit",
+      "details": "Home Page",
+      "time": "2026-03-07T22:42:11.581Z",
+      "ip": "::1"
+    },
+    {
+      "action": "visit",
+      "details": "Home Page",
+      "time": "2026-03-07T22:35:03.939Z",
+      "ip": "::1"
+    },
+    {
+      "action": "visit",
+      "details": "Home Page",
+      "time": "2026-03-07T22:34:19.907Z",
+      "ip": "::1"
+    },
+    {
+      "action": "interest",
+      "details": "Menambah ke keranjang: FinTrack",
+      "time": "2026-03-07T22:34:02.581Z",
+      "ip": "::1"
+    },
+    {
+      "action": "interest",
+      "details": "Menambah ke keranjang: Quran Bersama",
+      "time": "2026-03-07T22:34:01.264Z",
+      "ip": "::1"
+    },
+    {
+      "action": "interest",
+      "details": "Menambah ke keranjang: Quran Bersama",
+      "time": "2026-03-07T22:33:59.271Z",
+      "ip": "::1"
+    },
+    {
+      "action": "interest",
+      "details": "Menambah ke keranjang: FinTrack",
+      "time": "2026-03-07T22:33:52.733Z",
+      "ip": "::1"
+    },
+    {
+      "action": "interest",
+      "details": "Menambah ke keranjang: Quran Bersama",
+      "time": "2026-03-07T22:33:50.981Z",
+      "ip": "::1"
+    },
+    {
+      "action": "visit",
+      "details": "Home Page",
+      "time": "2026-03-07T22:33:32.001Z",
+      "ip": "::1"
+    },
+    {
+      "action": "visit",
+      "details": "Home Page",
+      "time": "2026-03-07T22:21:32.625Z",
+      "ip": "::1"
+    },
+    {
+      "action": "read_article",
+      "details": "Membaca: Keamanan Untuk Web Aplikasi Pada Web Server",
+      "time": "2026-03-07T22:20:34.340Z",
+      "ip": "::1"
+    },
+    {
+      "action": "read_article",
+      "details": "Membaca: Scan Backdoor Pada Sistem Linux Atau Windows",
+      "time": "2026-03-07T22:20:22.956Z",
+      "ip": "::1"
+    },
+    {
+      "action": "read_article",
+      "details": "Membaca: Cek Penggunaan Bandwidth Pada Server Linux",
+      "time": "2026-03-07T22:20:04.321Z",
+      "ip": "::1"
+    },
+    {
+      "action": "visit",
+      "details": "Home Page",
+      "time": "2026-03-07T22:19:41.642Z",
+      "ip": "::1"
+    },
+    {
+      "action": "visit",
+      "details": "Home Page",
+      "time": "2026-03-07T22:18:11.871Z",
+      "ip": "::1"
+    },
+    {
+      "action": "visit",
+      "details": "Home Page",
+      "time": "2026-03-07T22:16:22.071Z",
+      "ip": "::1"
+    },
+    {
+      "action": "visit",
+      "details": "Home Page",
+      "time": "2026-03-07T22:16:19.672Z",
+      "ip": "::1"
+    },
+    {
+      "action": "visit",
+      "details": "Home Page",
+      "time": "2026-03-07T22:06:41.423Z",
+      "ip": "::1"
+    }
+  ]
+}

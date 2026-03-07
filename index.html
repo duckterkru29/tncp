@@ -11,7 +11,7 @@
         content="Portfolio professional IT, Source Code Marketplace, dan Knowledge Sharing by TNCP. Build with passion, delivered with quality.">
 
     <!-- Scripts & Styles -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
     <!-- Marked & Highlight -->
@@ -179,6 +179,31 @@
             border-radius: 12px;
             font-family: 'Fira Code', monospace;
             font-size: 0.9rem;
+        }
+
+        /* Fix Article Spacing */
+        #art-modal-content p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        #art-modal-content pre {
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        #art-modal-content h1,
+        #art-modal-content h2,
+        #art-modal-content h3 {
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        #art-modal-content img {
+            margin: 2rem auto;
+            border-radius: 20px;
         }
     </style>
 </head>

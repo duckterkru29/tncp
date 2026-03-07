@@ -108,6 +108,12 @@ function renderMarketplace(data) {
         </div>
     `).join('');
 
+    // Initialize Marked options
+    marked.setOptions({
+        breaks: true,
+        gfm: true
+    });
+
     if (window.lucide) lucide.createIcons();
 }
 

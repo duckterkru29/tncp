@@ -25,6 +25,9 @@ async function init() {
         renderUI();
         initScrollReveal();
         updateDynamicContent();
+
+        // Track Page View
+        trackAction('visit', 'Home Page');
     } catch (err) {
         console.error("Critical Error Loading Data:", err);
     }
@@ -218,6 +221,9 @@ window.checkout = () => {
     const msg = `Halo ${settingsData.name || 'Admin'}! Saya ingin membeli produk berikut:${items}\n\nTotal Estimasi: Rp ${total.toLocaleString('id-ID')}\n\nMohon diproses, terima kasih.`;
 
     window.open(`https://wa.me/${settingsData.whatsapp || '6281310387659'}?text=${encodeURIComponent(msg)}`, '_blank');
+
+    // Track Checkout Order
+    trackAction('order', `User klik checkout via WA untuk ${cart.length} item.`);
 };
 
 // ==========================================
@@ -288,11 +294,13 @@ window.viewArticle = (id) => {
         hljs.lineNumbersBlock(block);
     });
 
-    // Show Modal
     modal.classList.remove('hidden');
     setTimeout(() => {
         sidebar.classList.remove('translate-x-full');
     }, 10);
+
+    // Track Article View
+    trackAction('read_article', `Membaca: ${art.title}`);
 };
 
 window.closeArticle = () => {
@@ -304,3 +312,18 @@ window.closeArticle = () => {
         modal.classList.add('hidden');
     }, 500);
 };
+
+// ==========================================
+// TRACKING SYSTEM
+// ==========================================
+async function trackAction(action, details = '') {
+    try {
+        await fetch('/api/stats/track', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action, details })
+        });
+    } catch (e) {
+        console.warn("Tracker offline.");
+    }
+}

@@ -198,6 +198,9 @@ window.addToCart = (title, price, img, id) => {
     }
     updateCart();
     showToast(`Berhasil menambahkan ${title}`);
+
+    // TRACK INTEREST (Berapa kali ditambahkan ke keranjang)
+    trackAction('interest', `Menambah ke keranjang: ${title}`, id);
 };
 
 function updateCart() {
@@ -345,6 +348,28 @@ window.closeArticle = () => {
     setTimeout(() => {
         modal.classList.add('hidden');
     }, 500);
+};
+
+window.shareArticle = () => {
+    const title = document.getElementById('art-modal-title').innerText;
+    const url = window.location.href;
+
+    if (navigator.share) {
+        navigator.share({
+            title: title,
+            text: `Baca artikel menarik ini: ${title}`,
+            url: url
+        }).catch(e => {
+            // User cancelled or error
+        });
+    } else {
+        // Fallback: Copy to clipboard
+        navigator.clipboard.writeText(url).then(() => {
+            showToast('Link artikel disalin ke clipboard!');
+        }).catch(() => {
+            showToast('Gagal menyalin link.');
+        });
+    }
 };
 
 // ==========================================

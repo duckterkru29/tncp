@@ -87,6 +87,7 @@ function renderProjects(data) {
     `).join('');
 
     if (window.lucide) lucide.createIcons();
+    initScrollReveal(); // Re-init to observe new elements
 }
 
 // ==========================================
@@ -149,6 +150,7 @@ function renderMarketplace(data) {
     });
 
     if (window.lucide) lucide.createIcons();
+    initScrollReveal();
 }
 
 // ==========================================
@@ -181,6 +183,7 @@ function renderArticles(data) {
     `).join('');
 
     if (window.lucide) lucide.createIcons();
+    initScrollReveal();
 }
 
 // ==========================================

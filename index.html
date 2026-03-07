@@ -153,15 +153,43 @@
             animation: float 6s ease-in-out infinite;
         }
 
-        /* Responsive Improvements */
-        .custom-scrollbar-hide::-webkit-scrollbar {
+        /* Figma Trending: Horizontal Snap Carousel */
+        .snap-carousel {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 2.5rem;
+            padding-bottom: 3rem;
+            padding-inline: 1rem;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .snap-carousel::-webkit-scrollbar {
             display: none;
         }
 
-        .custom-scrollbar-hide {
+        .snap-carousel {
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
+
+        .portfolio-item {
+            flex: 0 0 85vw;
+            scroll-snap-align: center;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @media (min-width: 768px) {
+            .portfolio-item {
+                flex: 0 0 450px;
+                scroll-snap-align: start;
+            }
+
+            .snap-carousel {
+                padding-inline: 0;
+            }
+        }
+    </style>
     </style>
     <style>
         /* Custom Code Styling (Highlight.js Line Numbers) */
@@ -432,12 +460,32 @@
                 </div>
             </div>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10" id="projects-grid">
-                <!-- Loading -->
-                <div class="col-span-full py-20 text-center">
+            <div class="snap-carousel custom-scrollbar-hide" id="projects-grid">
+                <!-- Data will be rendered here as Horizontal Cards -->
+                <div class="col-span-full py-20 text-center w-full">
                     <div
                         class="inline-block w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin">
                     </div>
+                </div>
+            </div>
+
+            <!-- Carousel Navigation & Hint -->
+            <div
+                class="flex flex-col md:flex-row items-center justify-between mt-10 border-t border-white/5 pt-8 reveal gap-6">
+                <div class="flex items-center gap-4 text-gray-500 text-sm italic">
+                    <i data-lucide="mouse-pointer-2" class="w-4 h-4 animate-bounce"></i>
+                    <span>Tahan & geser untuk melihat karya lainnya</span>
+                </div>
+                <div class="flex gap-4">
+                    <button
+                        onclick="document.getElementById('projects-grid').scrollBy({left: -400, behavior: 'smooth'})"
+                        class="w-14 h-14 glass rounded-2xl flex items-center justify-center hover:bg-primary transition-all border border-white/10 group">
+                        <i data-lucide="arrow-left" class="w-6 h-6 group-hover:scale-110 transition-transform"></i>
+                    </button>
+                    <button onclick="document.getElementById('projects-grid').scrollBy({left: 400, behavior: 'smooth'})"
+                        class="w-14 h-14 glass rounded-2xl flex items-center justify-center hover:bg-primary transition-all border border-white/10 group">
+                        <i data-lucide="arrow-right" class="w-6 h-6 group-hover:scale-110 transition-transform"></i>
+                    </button>
                 </div>
             </div>
         </div>

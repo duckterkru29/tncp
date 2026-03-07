@@ -47,40 +47,43 @@ function renderProjects(data) {
     if (!grid) return;
 
     grid.innerHTML = data.map(item => `
-        <div class="glass-card rounded-[32px] overflow-hidden group reveal">
-            <div class="relative aspect-video overflow-hidden">
-                <img src="${item.thumbnail ? './uploads/' + item.thumbnail : `https://source.unsplash.com/800x600/?technology,code,${item.id}`}" 
-                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
-                     alt="${item.title}">
-                <div class="absolute inset-0 bg-gradient-to-t from-darker via-transparent to-transparent opacity-80"></div>
-                ${item.isPopular ? `
-                    <div class="absolute top-5 right-5 h-8 px-4 bg-accent/90 backdrop-blur-md rounded-full flex items-center gap-2 border border-white/20">
-                        <span class="w-2 h-2 bg-white rounded-full animate-pulse"></span>
-                        <span class="text-[10px] font-black tracking-widest uppercase">Hot Product</span>
-                    </div>
-                ` : ''}
-                <div class="absolute bottom-6 left-6 flex gap-2">
-                    ${item.techStack.slice(0, 3).map(tech =>
+        <div class="portfolio-item snap-item group relative reveal">
+            <div class="glass-card rounded-[40px] overflow-hidden border-white/5 group-hover:border-primary/50 transition-all duration-500 h-full flex flex-col">
+                <div class="relative aspect-[16/10] overflow-hidden">
+                    <img src="./uploads/${item.thumbnail}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="${item.title}">
+                    <div class="absolute inset-0 bg-gradient-to-t from-darker via-transparent to-transparent opacity-80"></div>
+                    
+                    ${item.isPopular ? `
+                        <div class="absolute top-6 right-6 h-8 px-4 bg-accent/90 backdrop-blur-md rounded-full flex items-center gap-2 border border-white/20">
+                            <span class="w-2 h-2 bg-white rounded-full animate-pulse"></span>
+                            <span class="text-[10px] font-black tracking-widest uppercase text-white">Hot Product</span>
+                        </div>
+                    ` : ''}
+
+                    <div class="absolute bottom-6 left-6 flex flex-wrap gap-2">
+                        ${item.techStack.slice(0, 3).map(tech =>
         `<span class="px-3 py-1 glass border-white/10 rounded-lg text-[10px] font-bold text-gray-300 uppercase tracking-tighter">${tech}</span>`
     ).join('')}
-                </div>
-            </div>
-            <div class="p-8 space-y-4">
-                <div class="flex items-center gap-2 text-[10px] font-black text-primary tracking-[0.2em] uppercase">
-                    <i data-lucide="tag" class="w-3 h-3"></i> ${item.category}
-                </div>
-                <h3 class="text-2xl font-display font-bold leading-tight group-hover:text-primary transition-colors">${item.title}</h3>
-                <p class="text-gray-500 text-sm line-clamp-2 leading-relaxed">${item.description}</p>
-                
-                <div class="flex items-center justify-between pt-6 border-t border-white/5">
-                    <div class="space-y-1">
-                        <div class="text-sm text-gray-500 line-through decoration-accent/50 opacity-50">Rp ${(item.originalPrice / 1000).toFixed(0)}K</div>
-                        <div class="text-2xl font-display font-black text-white">Rp ${(item.price / 1000).toFixed(0)}K</div>
                     </div>
-                    <button onclick="addToCart('${item.title}', ${item.price}, './uploads/${item.thumbnail}', ${item.id})" 
-                            class="p-4 bg-white/5 hover:bg-primary rounded-2xl transition-all group/btn">
-                        <i data-lucide="shopping-cart" class="w-6 h-6 text-white group-hover/btn:scale-110 transition-transform"></i>
-                    </button>
+                </div>
+                
+                <div class="p-8 space-y-5 flex-grow">
+                    <div class="flex items-center gap-2 text-[10px] font-black text-primary tracking-[0.2em] uppercase">
+                        <i data-lucide="tag" class="w-3 h-3"></i> ${item.category}
+                    </div>
+                    <h3 class="text-2xl font-display font-bold leading-tight group-hover:text-primary transition-colors">${item.title}</h3>
+                    <p class="text-gray-500 text-sm line-clamp-2 leading-relaxed">${item.description}</p>
+                    
+                    <div class="flex items-center justify-between pt-6 border-t border-white/5 mt-auto">
+                        <div class="space-y-1">
+                            <div class="text-sm text-gray-500 line-through decoration-accent/50 opacity-50">Rp ${(item.originalPrice / 1000).toFixed(0)}K</div>
+                            <div class="text-2xl font-display font-black text-white">Rp ${(item.price / 1000).toFixed(0)}K</div>
+                        </div>
+                        <button onclick="addToCart('${item.title}', ${item.price}, './uploads/${item.thumbnail}', ${item.id})" 
+                                class="p-4 bg-white/5 hover:bg-primary rounded-2xl transition-all group/btn shadow-xl">
+                            <i data-lucide="shopping-cart" class="w-6 h-6 text-white group-hover/btn:scale-110 transition-transform"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

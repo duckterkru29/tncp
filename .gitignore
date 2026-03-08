@@ -5,3 +5,6 @@ server.js
 views/
 public/
 .env
+data/settings.json
+public/data/settings.json
+server.js

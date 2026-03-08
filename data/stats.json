@@ -1,8 +1,38 @@
 {
-  "visits": 71,
+  "visits": 73,
   "orders": 19,
-  "articleViews": 19,
+  "articleViews": 20,
   "logs": [
+    {
+      "action": "visit",
+      "details": "Home Page",
+      "time": "2026-03-08T18:49:22.527Z",
+      "ip": "::1"
+    },
+    {
+      "action": "view_product",
+      "details": "Melihat detail: Quran Bersama",
+      "time": "2026-03-08T10:27:51.148Z",
+      "ip": "::1"
+    },
+    {
+      "action": "view_product",
+      "details": "Melihat detail: Reservasi",
+      "time": "2026-03-08T10:27:29.283Z",
+      "ip": "::1"
+    },
+    {
+      "action": "read_article",
+      "details": "Membaca: Keamanan Untuk Web Aplikasi Pada Web Server",
+      "time": "2026-03-08T10:27:21.827Z",
+      "ip": "::1"
+    },
+    {
+      "action": "visit",
+      "details": "Home Page",
+      "time": "2026-03-08T10:27:10.186Z",
+      "ip": "::1"
+    },
     {
       "action": "visit",
       "details": "Home Page",
@@ -271,36 +301,6 @@
       "action": "interest",
       "details": "Menambah ke keranjang: Ticketing",
       "time": "2026-03-08T09:09:59.853Z",
-      "ip": "::1"
-    },
-    {
-      "action": "expand_marketplace",
-      "details": "User memperluas katalog produk marketplace",
-      "time": "2026-03-08T09:09:37.022Z",
-      "ip": "::1"
-    },
-    {
-      "action": "visit",
-      "details": "Home Page",
-      "time": "2026-03-08T09:09:14.806Z",
-      "ip": "::1"
-    },
-    {
-      "action": "visit",
-      "details": "Home Page",
-      "time": "2026-03-08T09:05:37.227Z",
-      "ip": "::1"
-    },
-    {
-      "action": "show_all_portfolio",
-      "details": "Mengaktifkan mode Grid/Tampilkan Semua",
-      "time": "2026-03-08T09:05:20.517Z",
-      "ip": "::1"
-    },
-    {
-      "action": "visit",
-      "details": "Home Page",
-      "time": "2026-03-08T09:04:39.420Z",
       "ip": "::1"
     }
   ]

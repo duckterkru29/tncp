@@ -3,6 +3,7 @@ let projectsData = [];
 let articlesData = [];
 let settingsData = {};
 let cart = [];
+let isStoreExpanded = false;
 
 // ==========================================
 // CORE DATA LOADING
@@ -143,27 +144,14 @@ function initAutoSlider() {
     }, interval);
 }
 
-window.showAllPortfolio = () => {
-    const grid = document.getElementById('projects-grid');
-    const container = grid.parentElement;
+window.expandStore = () => {
+    isStoreExpanded = true;
+    renderMarketplace(projectsData);
+    trackAction('expand_marketplace', 'User memperluas katalog produk marketplace');
 
-    // Toggle Class for Mode Grid
-    if (grid.classList.contains('snap-carousel')) {
-        grid.classList.remove('snap-carousel', 'hide-scrollbar');
-        grid.classList.add('grid', 'md:grid-cols-2', 'lg:grid-cols-3', 'gap-10');
-
-        // Sembunyikan Navigasi Slider
-        const nav = container.querySelector('.flex-col.md\\:flex-row');
-        if (nav) nav.classList.add('hidden');
-
-        // Sembunyikan Fade Effect jika ada
-        const filterCont = document.querySelector('.filter-container');
-        if (filterCont) filterCont.classList.add('after:hidden');
-    }
-
-    // Scroll ke section projects
-    document.getElementById('projects').scrollIntoView({ behavior: 'smooth' });
-    trackAction('show_all_portfolio', 'Mengaktifkan mode Grid/Tampilkan Semua');
+    // Sembunyikan button setelah expand
+    const btn = document.querySelector('button[onclick="expandStore()"]');
+    if (btn) btn.classList.add('hidden');
 };
 
 // ==========================================
@@ -173,7 +161,10 @@ function renderMarketplace(data) {
     const grid = document.getElementById('store-grid');
     if (!grid) return;
 
-    grid.innerHTML = data.slice(0, 4).map(item => `
+    // Tampilkan 4 pertama jika belum expand, tampilkan semua jika sudah
+    const displayData = isStoreExpanded ? data : data.slice(0, 4);
+
+    grid.innerHTML = displayData.map(item => `
         <div class="glass p-5 rounded-3xl space-y-4 hover:border-primary/50 transition-colors">
             <div class="aspect-square rounded-2xl overflow-hidden">
                 <img src="${item.thumbnail ? './uploads/' + item.thumbnail : `https://source.unsplash.com/400x400/?software,app,${item.id}`}" class="w-full h-full object-cover">

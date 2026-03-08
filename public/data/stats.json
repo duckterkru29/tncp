@@ -1,8 +1,26 @@
 {
-  "visits": 36,
+  "visits": 38,
   "orders": 11,
   "articleViews": 19,
   "logs": [
+    {
+      "action": "visit",
+      "details": "Home Page",
+      "time": "2026-03-08T09:05:37.227Z",
+      "ip": "::1"
+    },
+    {
+      "action": "show_all_portfolio",
+      "details": "Mengaktifkan mode Grid/Tampilkan Semua",
+      "time": "2026-03-08T09:05:20.517Z",
+      "ip": "::1"
+    },
+    {
+      "action": "visit",
+      "details": "Home Page",
+      "time": "2026-03-08T09:04:39.420Z",
+      "ip": "::1"
+    },
     {
       "action": "read_article",
       "details": "Membaca: Reset Password Root Pada Centos",
@@ -283,24 +301,6 @@
       "action": "interest",
       "details": "Menambah ke keranjang: FinTrack",
       "time": "2026-03-07T23:04:35.447Z",
-      "ip": "::1"
-    },
-    {
-      "action": "interest",
-      "details": "Menambah ke keranjang: Quran Bersama",
-      "time": "2026-03-07T23:04:34.401Z",
-      "ip": "::1"
-    },
-    {
-      "action": "visit",
-      "details": "Home Page",
-      "time": "2026-03-07T23:04:29.187Z",
-      "ip": "::1"
-    },
-    {
-      "action": "visit",
-      "details": "Home Page",
-      "time": "2026-03-07T23:03:32.502Z",
       "ip": "::1"
     }
   ]

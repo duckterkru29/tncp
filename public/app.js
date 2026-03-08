@@ -150,11 +150,16 @@ function initAutoSlider() {
             const gap = parseFloat(getComputedStyle(grid).gap) || 0;
             const scrollStep = firstItem.offsetWidth + gap;
 
-            // Logika deteksi ujung yang lebih longgar (+- 100px) agar tidak macet
-            const isAtEnd = grid.scrollLeft + grid.offsetWidth >= grid.scrollWidth - 100;
+            // Hitung lebar konten asli sebelum klon (kita mengklon 4 item di renderer)
+            // Jadi ada total (N + 4) items. Ujung konten asli adalah (N * scrollStep)
+            // Namun cara paling aman adalah mendeteksi sisa scroll yang sudah habis
+
+            const isAtEnd = grid.scrollLeft + grid.offsetWidth >= grid.scrollWidth - 50;
 
             if (isAtEnd) {
+                // Lompat instan ke awal tanpa animasi
                 grid.scrollTo({ left: 0, behavior: 'auto' });
+                // Beri jeda 50ms agar browser render posisi 0, baru geser ke item ke-1 secara smooth
                 setTimeout(() => {
                     grid.scrollBy({ left: scrollStep, behavior: 'smooth' });
                 }, 50);
@@ -221,7 +226,7 @@ function renderArticles(data) {
     const items = [...data, ...data.slice(0, 4)];
 
     grid.innerHTML = items.map(art => `
-        <article class="portfolio-item snap-item group cursor-pointer reveal" onclick="viewArticle(${art.id})">
+        <article class="article-item snap-item group cursor-pointer reveal" onclick="viewArticle(${art.id})">
             <div class="glass-card rounded-[32px] overflow-hidden h-full flex flex-col">
                 <div class="relative h-56 overflow-hidden">
                     <img src="${art.coverImage ? './uploads/' + art.coverImage : `https://source.unsplash.com/800x600/?tech,it,${art.id}`}" 

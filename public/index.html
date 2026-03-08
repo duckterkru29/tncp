@@ -206,10 +206,8 @@
         }
 
         #articles-grid {
-            display: grid;
-            grid-auto-flow: column;
-            grid-template-rows: 1fr;
-            /* 1 baris artikel saja agar lebih profesional */
+            display: flex;
+            /* Flex agar scroll item konsisten */
             gap: 2rem;
         }
 
@@ -223,6 +221,12 @@
         }
 
         .portfolio-item {
+            flex: 0 0 85vw;
+            scroll-snap-align: center;
+            scroll-snap-stop: always;
+        }
+
+        .article-item {
             flex: 0 0 85vw;
             scroll-snap-align: center;
             scroll-snap-stop: always;
@@ -286,6 +290,12 @@
 
             .portfolio-item {
                 flex: 0 0 450px;
+                scroll-snap-align: start;
+            }
+
+            .article-item {
+                flex: 0 0 calc((100% - 5rem) / 3);
+                /* Tepat 3 kolom di desktop */
                 scroll-snap-align: start;
             }
 

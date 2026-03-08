@@ -1,8 +1,32 @@
 {
-  "visits": 54,
+  "visits": 58,
   "orders": 19,
   "articleViews": 19,
   "logs": [
+    {
+      "action": "visit",
+      "details": "Home Page",
+      "time": "2026-03-08T09:45:24.295Z",
+      "ip": "::1"
+    },
+    {
+      "action": "visit",
+      "details": "Home Page",
+      "time": "2026-03-08T09:45:14.197Z",
+      "ip": "::1"
+    },
+    {
+      "action": "visit",
+      "details": "Home Page",
+      "time": "2026-03-08T09:40:49.164Z",
+      "ip": "::1"
+    },
+    {
+      "action": "visit",
+      "details": "Home Page",
+      "time": "2026-03-08T09:40:42.975Z",
+      "ip": "::1"
+    },
     {
       "action": "visit",
       "details": "Home Page",
@@ -277,30 +301,6 @@
       "action": "read_article",
       "details": "Membaca: Script Hardening Sistem Operasi Linux Dan Windows Dari Cloudneeti",
       "time": "2026-03-08T08:48:02.125Z",
-      "ip": "::1"
-    },
-    {
-      "action": "read_article",
-      "details": "Membaca: Remove Dan Install SSH Pada Linux",
-      "time": "2026-03-08T08:47:49.952Z",
-      "ip": "::1"
-    },
-    {
-      "action": "visit",
-      "details": "Home Page",
-      "time": "2026-03-08T08:47:46.085Z",
-      "ip": "::1"
-    },
-    {
-      "action": "read_article",
-      "details": "Membaca: Remove Dan Install SSH Pada Linux",
-      "time": "2026-03-08T08:47:41.020Z",
-      "ip": "::1"
-    },
-    {
-      "action": "read_article",
-      "details": "Membaca: Remove Dan Install SSH Pada Linux",
-      "time": "2026-03-08T08:46:08.990Z",
       "ip": "::1"
     }
   ]

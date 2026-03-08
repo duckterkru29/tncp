@@ -37,6 +37,7 @@ function renderUI() {
     renderProjects(projectsData);
     renderMarketplace(projectsData);
     renderArticles(articlesData);
+    initAutoSlider();
 }
 
 // ==========================================
@@ -124,6 +125,47 @@ window.filterProjects = (category) => {
     trackAction('filter_portfolio', `User filter portfolio ke: ${category}`);
 };
 
+// Auto Slider Logic
+function initAutoSlider() {
+    const grid = document.getElementById('projects-grid');
+    if (!grid) return;
+
+    let scrollAmount = 0;
+    const scrollStep = 450;
+    const interval = 5000; // 5 Detik
+
+    setInterval(() => {
+        if (grid.scrollLeft + grid.offsetWidth >= grid.scrollWidth) {
+            grid.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+            grid.scrollBy({ left: scrollStep, behavior: 'smooth' });
+        }
+    }, interval);
+}
+
+window.showAllPortfolio = () => {
+    const grid = document.getElementById('projects-grid');
+    const container = grid.parentElement;
+
+    // Toggle Class for Mode Grid
+    if (grid.classList.contains('snap-carousel')) {
+        grid.classList.remove('snap-carousel', 'hide-scrollbar');
+        grid.classList.add('grid', 'md:grid-cols-2', 'lg:grid-cols-3', 'gap-10');
+
+        // Sembunyikan Navigasi Slider
+        const nav = container.querySelector('.flex-col.md\\:flex-row');
+        if (nav) nav.classList.add('hidden');
+
+        // Sembunyikan Fade Effect jika ada
+        const filterCont = document.querySelector('.filter-container');
+        if (filterCont) filterCont.classList.add('after:hidden');
+    }
+
+    // Scroll ke section projects
+    document.getElementById('projects').scrollIntoView({ behavior: 'smooth' });
+    trackAction('show_all_portfolio', 'Mengaktifkan mode Grid/Tampilkan Semua');
+};
+
 // ==========================================
 // STORE RENDERER (MARKETPLACE)
 // ==========================================
@@ -163,7 +205,10 @@ function renderArticles(data) {
     const grid = document.getElementById('articles-grid');
     if (!grid) return;
 
-    grid.innerHTML = data.map(art => `
+    // Tampilkan hanya 2 baris (Desktop 3x2 = 6 artikel)
+    const limitedData = data.slice(0, 6);
+
+    grid.innerHTML = limitedData.map(art => `
         <article class="group cursor-pointer reveal" onclick="viewArticle(${art.id})">
             <div class="glass-card rounded-[32px] overflow-hidden">
                 <div class="relative h-56 overflow-hidden">

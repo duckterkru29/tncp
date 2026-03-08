@@ -1,8 +1,170 @@
 {
-  "visits": 25,
+  "visits": 36,
   "orders": 11,
-  "articleViews": 3,
+  "articleViews": 19,
   "logs": [
+    {
+      "action": "read_article",
+      "details": "Membaca: Reset Password Root Pada Centos",
+      "time": "2026-03-08T09:03:51.494Z",
+      "ip": "::1"
+    },
+    {
+      "action": "visit",
+      "details": "Home Page",
+      "time": "2026-03-08T09:00:00.193Z",
+      "ip": "::1"
+    },
+    {
+      "action": "read_article",
+      "details": "Membaca: Implementasi Exporter Untuk Prometheus",
+      "time": "2026-03-08T08:54:56.818Z",
+      "ip": "::1"
+    },
+    {
+      "action": "visit",
+      "details": "Home Page",
+      "time": "2026-03-08T08:54:52.024Z",
+      "ip": "::1"
+    },
+    {
+      "action": "read_article",
+      "details": "Membaca: Solusi 75% Proses Zabbix Housekeeper",
+      "time": "2026-03-08T08:52:15.753Z",
+      "ip": "::1"
+    },
+    {
+      "action": "visit",
+      "details": "Home Page",
+      "time": "2026-03-08T08:52:11.164Z",
+      "ip": "::1"
+    },
+    {
+      "action": "read_article",
+      "details": "Membaca: Cek Penggunaan Bandwidth Pada Server Linux",
+      "time": "2026-03-08T08:49:50.511Z",
+      "ip": "::1"
+    },
+    {
+      "action": "read_article",
+      "details": "Membaca: Scan Backdoor Pada Sistem Linux Atau Windows",
+      "time": "2026-03-08T08:49:46.760Z",
+      "ip": "::1"
+    },
+    {
+      "action": "read_article",
+      "details": "Membaca: Keamanan Untuk Web Aplikasi Pada Web Server",
+      "time": "2026-03-08T08:49:32.317Z",
+      "ip": "::1"
+    },
+    {
+      "action": "read_article",
+      "details": "Membaca: Membuat Akun Setara Root Di Linux",
+      "time": "2026-03-08T08:49:21.506Z",
+      "ip": "::1"
+    },
+    {
+      "action": "read_article",
+      "details": "Membaca: Implementasi Pentaho Server Dengan PostgreSQL",
+      "time": "2026-03-08T08:48:48.541Z",
+      "ip": "::1"
+    },
+    {
+      "action": "visit",
+      "details": "Home Page",
+      "time": "2026-03-08T08:48:44.226Z",
+      "ip": "::1"
+    },
+    {
+      "action": "read_article",
+      "details": "Membaca: Implementasi Pentaho Server Dengan PostgreSQL",
+      "time": "2026-03-08T08:48:07.659Z",
+      "ip": "::1"
+    },
+    {
+      "action": "read_article",
+      "details": "Membaca: Script Hardening Sistem Operasi Linux Dan Windows Dari Cloudneeti",
+      "time": "2026-03-08T08:48:02.125Z",
+      "ip": "::1"
+    },
+    {
+      "action": "read_article",
+      "details": "Membaca: Remove Dan Install SSH Pada Linux",
+      "time": "2026-03-08T08:47:49.952Z",
+      "ip": "::1"
+    },
+    {
+      "action": "visit",
+      "details": "Home Page",
+      "time": "2026-03-08T08:47:46.085Z",
+      "ip": "::1"
+    },
+    {
+      "action": "read_article",
+      "details": "Membaca: Remove Dan Install SSH Pada Linux",
+      "time": "2026-03-08T08:47:41.020Z",
+      "ip": "::1"
+    },
+    {
+      "action": "read_article",
+      "details": "Membaca: Remove Dan Install SSH Pada Linux",
+      "time": "2026-03-08T08:46:08.990Z",
+      "ip": "::1"
+    },
+    {
+      "action": "read_article",
+      "details": "Membaca: Implementasi Pentaho Server Dengan PostgreSQL",
+      "time": "2026-03-08T08:45:42.719Z",
+      "ip": "::1"
+    },
+    {
+      "action": "read_article",
+      "details": "Membaca: Remove Dan Install SSH Pada Linux",
+      "time": "2026-03-08T08:45:25.508Z",
+      "ip": "::1"
+    },
+    {
+      "action": "visit",
+      "details": "Home Page",
+      "time": "2026-03-08T08:45:20.964Z",
+      "ip": "::1"
+    },
+    {
+      "action": "read_article",
+      "details": "Membaca: Script Hardening Sistem Operasi Linux Dan Windows Dari Cloudneeti",
+      "time": "2026-03-08T08:42:04.008Z",
+      "ip": "::1"
+    },
+    {
+      "action": "visit",
+      "details": "Home Page",
+      "time": "2026-03-08T08:41:43.203Z",
+      "ip": "::1"
+    },
+    {
+      "action": "visit",
+      "details": "Home Page",
+      "time": "2026-03-08T08:36:49.037Z",
+      "ip": "::1"
+    },
+    {
+      "action": "visit",
+      "details": "Home Page",
+      "time": "2026-03-08T08:35:05.621Z",
+      "ip": "::1"
+    },
+    {
+      "action": "visit",
+      "details": "Home Page",
+      "time": "2026-03-08T08:14:36.967Z",
+      "ip": "::1"
+    },
+    {
+      "action": "visit",
+      "details": "Home Page",
+      "time": "2026-03-08T08:11:34.399Z",
+      "ip": "::1"
+    },
     {
       "action": "filter_portfolio",
       "details": "User filter portfolio ke: system",
@@ -139,144 +301,6 @@
       "action": "visit",
       "details": "Home Page",
       "time": "2026-03-07T23:03:32.502Z",
-      "ip": "::1"
-    },
-    {
-      "action": "visit",
-      "details": "Home Page",
-      "time": "2026-03-07T23:02:44.100Z",
-      "ip": "::1"
-    },
-    {
-      "action": "visit",
-      "details": "Home Page",
-      "time": "2026-03-07T23:02:35.078Z",
-      "ip": "::1"
-    },
-    {
-      "action": "visit",
-      "details": "Home Page",
-      "time": "2026-03-07T22:59:01.219Z",
-      "ip": "::1"
-    },
-    {
-      "action": "visit",
-      "details": "Home Page",
-      "time": "2026-03-07T22:51:01.571Z",
-      "ip": "::1"
-    },
-    {
-      "action": "visit",
-      "details": "Home Page",
-      "time": "2026-03-07T22:50:02.220Z",
-      "ip": "::1"
-    },
-    {
-      "action": "visit",
-      "details": "Home Page",
-      "time": "2026-03-07T22:42:11.581Z",
-      "ip": "::1"
-    },
-    {
-      "action": "visit",
-      "details": "Home Page",
-      "time": "2026-03-07T22:35:03.939Z",
-      "ip": "::1"
-    },
-    {
-      "action": "visit",
-      "details": "Home Page",
-      "time": "2026-03-07T22:34:19.907Z",
-      "ip": "::1"
-    },
-    {
-      "action": "interest",
-      "details": "Menambah ke keranjang: FinTrack",
-      "time": "2026-03-07T22:34:02.581Z",
-      "ip": "::1"
-    },
-    {
-      "action": "interest",
-      "details": "Menambah ke keranjang: Quran Bersama",
-      "time": "2026-03-07T22:34:01.264Z",
-      "ip": "::1"
-    },
-    {
-      "action": "interest",
-      "details": "Menambah ke keranjang: Quran Bersama",
-      "time": "2026-03-07T22:33:59.271Z",
-      "ip": "::1"
-    },
-    {
-      "action": "interest",
-      "details": "Menambah ke keranjang: FinTrack",
-      "time": "2026-03-07T22:33:52.733Z",
-      "ip": "::1"
-    },
-    {
-      "action": "interest",
-      "details": "Menambah ke keranjang: Quran Bersama",
-      "time": "2026-03-07T22:33:50.981Z",
-      "ip": "::1"
-    },
-    {
-      "action": "visit",
-      "details": "Home Page",
-      "time": "2026-03-07T22:33:32.001Z",
-      "ip": "::1"
-    },
-    {
-      "action": "visit",
-      "details": "Home Page",
-      "time": "2026-03-07T22:21:32.625Z",
-      "ip": "::1"
-    },
-    {
-      "action": "read_article",
-      "details": "Membaca: Keamanan Untuk Web Aplikasi Pada Web Server",
-      "time": "2026-03-07T22:20:34.340Z",
-      "ip": "::1"
-    },
-    {
-      "action": "read_article",
-      "details": "Membaca: Scan Backdoor Pada Sistem Linux Atau Windows",
-      "time": "2026-03-07T22:20:22.956Z",
-      "ip": "::1"
-    },
-    {
-      "action": "read_article",
-      "details": "Membaca: Cek Penggunaan Bandwidth Pada Server Linux",
-      "time": "2026-03-07T22:20:04.321Z",
-      "ip": "::1"
-    },
-    {
-      "action": "visit",
-      "details": "Home Page",
-      "time": "2026-03-07T22:19:41.642Z",
-      "ip": "::1"
-    },
-    {
-      "action": "visit",
-      "details": "Home Page",
-      "time": "2026-03-07T22:18:11.871Z",
-      "ip": "::1"
-    },
-    {
-      "action": "visit",
-      "details": "Home Page",
-      "time": "2026-03-07T22:16:22.071Z",
-      "ip": "::1"
-    },
-    {
-      "action": "visit",
-      "details": "Home Page",
-      "time": "2026-03-07T22:16:19.672Z",
-      "ip": "::1"
-    },
-    {
-      "action": "visit",
-      "details": "Home Page",
-      "time": "2026-03-07T22:06:41.423Z",
       "ip": "::1"
     }
   ]

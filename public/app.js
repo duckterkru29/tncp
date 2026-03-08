@@ -52,7 +52,7 @@ function renderProjects(data) {
     const items = [...data, ...data.slice(0, 10)];
 
     grid.innerHTML = items.map(item => `
-        <div class="portfolio-item snap-item group relative reveal">
+        <div class="portfolio-item snap-item group relative reveal cursor-pointer" onclick="viewProject(${item.id})">
             <div class="glass-card rounded-[40px] overflow-hidden border-white/5 group-hover:border-primary/50 transition-all duration-500 h-full flex flex-col">
                 <div class="relative aspect-[16/10] overflow-hidden">
                     <img src="./uploads/${item.thumbnail}" class="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-700" alt="${item.title}">
@@ -84,7 +84,7 @@ function renderProjects(data) {
                             <div class="text-sm text-gray-500 line-through decoration-accent/50 opacity-50">Rp ${(item.originalPrice / 1000).toFixed(0)}K</div>
                             <div class="text-2xl font-display font-black text-white">Rp ${(item.price / 1000).toFixed(0)}K</div>
                         </div>
-                        <button onclick="addToCart('${item.title}', ${item.price}, './uploads/${item.thumbnail}', ${item.id})" 
+                        <button onclick="event.stopPropagation(); addToCart('${item.title}', ${item.price}, './uploads/${item.thumbnail}', ${item.id})" 
                                 class="p-4 bg-white/5 hover:bg-primary rounded-2xl transition-all group/btn shadow-xl">
                             <i data-lucide="shopping-cart" class="w-6 h-6 text-white group-hover/btn:scale-110 transition-transform"></i>
                         </button>
@@ -186,7 +186,7 @@ function renderMarketplace(data) {
     const displayData = isStoreExpanded ? data : data.slice(0, 4);
 
     grid.innerHTML = displayData.map(item => `
-        <div class="glass p-5 rounded-3xl space-y-4 hover:border-primary/50 transition-colors">
+        <div class="glass p-5 rounded-3xl space-y-4 hover:border-primary/50 transition-colors cursor-pointer" onclick="viewProject(${item.id})">
             <div class="aspect-square rounded-2xl overflow-hidden">
                 <img src="${item.thumbnail ? './uploads/' + item.thumbnail : `https://source.unsplash.com/400x400/?software,app,${item.id}`}" class="w-full h-full object-cover">
             </div>
@@ -194,7 +194,7 @@ function renderMarketplace(data) {
                 <h4 class="font-bold text-sm line-clamp-1">${item.title}</h4>
                 <div class="flex justify-between items-center mt-2">
                     <span class="text-accent font-black text-sm">Rp ${(item.price / 1000).toFixed(0)}K</span>
-                    <button onclick="addToCart('${item.title}', ${item.price}, './uploads/${item.thumbnail}', ${item.id})" class="text-primary hover:text-white"><i data-lucide="plus-circle" class="w-5 h-5"></i></button>
+                    <button onclick="event.stopPropagation(); addToCart('${item.title}', ${item.price}, './uploads/${item.thumbnail}', ${item.id})" class="text-primary hover:text-white"><i data-lucide="plus-circle" class="w-5 h-5"></i></button>
                 </div>
             </div>
         </div>
@@ -430,6 +430,73 @@ window.shareArticle = () => {
             showToast('Gagal menyalin link.');
         });
     }
+};
+
+// ==========================================
+// PROJECT DETAIL LOGIC
+// ==========================================
+window.viewProject = (id) => {
+    const proj = projectsData.find(p => p.id === id);
+    if (!proj) return;
+
+    const modal = document.getElementById('project-modal');
+    const sidebar = document.getElementById('project-sidebar');
+
+    // Headers & Basic Info
+    document.getElementById('proj-modal-title').innerText = proj.title;
+    document.getElementById('proj-modal-category').innerText = proj.category;
+    document.getElementById('proj-modal-description').innerText = proj.description;
+    document.getElementById('proj-modal-cover').src = './uploads/' + proj.thumbnail;
+
+    // Prices
+    document.getElementById('proj-modal-price').innerText = `Rp ${(proj.price / 1000).toFixed(0)}K`;
+    document.getElementById('proj-modal-oldprice').innerText = proj.originalPrice ? `Rp ${(proj.originalPrice / 1000).toFixed(0)}K` : '';
+
+    // Popular Badge
+    const popularBadge = document.getElementById('proj-modal-popular');
+    if (proj.isPopular) popularBadge.classList.remove('hidden');
+    else popularBadge.classList.add('hidden');
+
+    // Tech Stack
+    const techEl = document.getElementById('proj-modal-tech');
+    techEl.innerHTML = proj.techStack.map(tech => `
+        <span class="px-4 py-2 glass border-white/10 rounded-xl text-xs font-bold text-gray-300 uppercase tracking-tight">${tech}</span>
+    `).join('');
+
+    // Features
+    const featEl = document.getElementById('proj-modal-features');
+    featEl.innerHTML = proj.features.map(feat => `
+        <li class="flex items-start gap-3">
+            <i data-lucide="circle-dot" class="w-4 h-4 text-primary shrink-0 mt-0.5"></i>
+            <span>${feat}</span>
+        </li>
+    `).join('');
+
+    // Add to Cart Button
+    const cartBtn = document.getElementById('proj-modal-add-cart');
+    cartBtn.onclick = () => {
+        addToCart(proj.title, proj.price, './uploads/' + proj.thumbnail, proj.id);
+    };
+
+    if (window.lucide) lucide.createIcons();
+
+    modal.classList.remove('hidden');
+    setTimeout(() => {
+        sidebar.classList.remove('translate-x-full');
+    }, 10);
+
+    // Track View
+    trackAction('view_product', `Melihat detail: ${proj.title}`, proj.id);
+};
+
+window.closeProject = () => {
+    const modal = document.getElementById('project-modal');
+    const sidebar = document.getElementById('project-sidebar');
+
+    sidebar.classList.add('translate-x-full');
+    setTimeout(() => {
+        modal.classList.add('hidden');
+    }, 500);
 };
 
 // ==========================================

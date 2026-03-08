@@ -1,8 +1,20 @@
 {
-  "visits": 68,
+  "visits": 70,
   "orders": 19,
   "articleViews": 19,
   "logs": [
+    {
+      "action": "visit",
+      "details": "Home Page",
+      "time": "2026-03-08T10:19:56.274Z",
+      "ip": "::1"
+    },
+    {
+      "action": "visit",
+      "details": "Home Page",
+      "time": "2026-03-08T10:17:45.786Z",
+      "ip": "::1"
+    },
     {
       "action": "visit",
       "details": "Home Page",
@@ -289,18 +301,6 @@
       "action": "visit",
       "details": "Home Page",
       "time": "2026-03-08T09:00:00.193Z",
-      "ip": "::1"
-    },
-    {
-      "action": "read_article",
-      "details": "Membaca: Implementasi Exporter Untuk Prometheus",
-      "time": "2026-03-08T08:54:56.818Z",
-      "ip": "::1"
-    },
-    {
-      "action": "visit",
-      "details": "Home Page",
-      "time": "2026-03-08T08:54:52.024Z",
       "ip": "::1"
     }
   ]

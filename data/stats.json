@@ -1,8 +1,38 @@
 {
-  "visits": 65,
+  "visits": 70,
   "orders": 19,
   "articleViews": 19,
   "logs": [
+    {
+      "action": "visit",
+      "details": "Home Page",
+      "time": "2026-03-08T10:19:56.274Z",
+      "ip": "::1"
+    },
+    {
+      "action": "visit",
+      "details": "Home Page",
+      "time": "2026-03-08T10:17:45.786Z",
+      "ip": "::1"
+    },
+    {
+      "action": "visit",
+      "details": "Home Page",
+      "time": "2026-03-08T10:15:21.750Z",
+      "ip": "::1"
+    },
+    {
+      "action": "visit",
+      "details": "Home Page",
+      "time": "2026-03-08T10:13:08.354Z",
+      "ip": "::1"
+    },
+    {
+      "action": "visit",
+      "details": "Home Page",
+      "time": "2026-03-08T10:12:38.023Z",
+      "ip": "::1"
+    },
     {
       "action": "visit",
       "details": "Home Page",
@@ -271,36 +301,6 @@
       "action": "visit",
       "details": "Home Page",
       "time": "2026-03-08T09:00:00.193Z",
-      "ip": "::1"
-    },
-    {
-      "action": "read_article",
-      "details": "Membaca: Implementasi Exporter Untuk Prometheus",
-      "time": "2026-03-08T08:54:56.818Z",
-      "ip": "::1"
-    },
-    {
-      "action": "visit",
-      "details": "Home Page",
-      "time": "2026-03-08T08:54:52.024Z",
-      "ip": "::1"
-    },
-    {
-      "action": "read_article",
-      "details": "Membaca: Solusi 75% Proses Zabbix Housekeeper",
-      "time": "2026-03-08T08:52:15.753Z",
-      "ip": "::1"
-    },
-    {
-      "action": "visit",
-      "details": "Home Page",
-      "time": "2026-03-08T08:52:11.164Z",
-      "ip": "::1"
-    },
-    {
-      "action": "read_article",
-      "details": "Membaca: Cek Penggunaan Bandwidth Pada Server Linux",
-      "time": "2026-03-08T08:49:50.511Z",
       "ip": "::1"
     }
   ]

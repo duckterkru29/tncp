@@ -48,7 +48,10 @@ function renderProjects(data) {
     const grid = document.getElementById('projects-grid');
     if (!grid) return;
 
-    grid.innerHTML = data.map(item => `
+    // Clone 4 item pertama ke belakang untuk efek infinite loop yang mulus
+    const items = [...data, ...data.slice(0, 4)];
+
+    grid.innerHTML = items.map(item => `
         <div class="portfolio-item snap-item group relative reveal">
             <div class="glass-card rounded-[40px] overflow-hidden border-white/5 group-hover:border-primary/50 transition-all duration-500 h-full flex flex-col">
                 <div class="relative aspect-[16/10] overflow-hidden">
@@ -137,17 +140,23 @@ function initAutoSlider() {
             const grid = document.getElementById(id);
             if (!grid) return;
 
-            // Jangan auto-slide artikel di mobile karena sekarang mode Grid
+            // Jangan auto-slide artikel di mobile karena sekarang mode Grid statis
             if (id === 'articles-grid' && window.innerWidth < 768) return;
 
-            const item = grid.querySelector('.snap-item');
-            if (!item) return;
+            const items = grid.querySelectorAll('.snap-item');
+            if (items.length === 0) return;
 
+            const firstItem = items[0];
             const gap = parseFloat(getComputedStyle(grid).gap) || 0;
-            const scrollStep = item.offsetWidth + gap;
+            const scrollStep = firstItem.offsetWidth + gap;
 
-            if (grid.scrollLeft + grid.offsetWidth >= grid.scrollWidth - 10) {
-                grid.scrollTo({ left: 0, behavior: 'smooth' });
+            // Jika sampai di klon terakhir (ujung kanan), lompat instan ke awal tanpa animasi
+            if (grid.scrollLeft + grid.offsetWidth >= grid.scrollWidth - 20) {
+                grid.scrollTo({ left: 0, behavior: 'auto' });
+                // Lalu gulir ke item pertama secara smooth
+                setTimeout(() => {
+                    grid.scrollBy({ left: scrollStep, behavior: 'smooth' });
+                }, 50);
             } else {
                 grid.scrollBy({ left: scrollStep, behavior: 'smooth' });
             }
@@ -207,7 +216,10 @@ function renderArticles(data) {
     const grid = document.getElementById('articles-grid');
     if (!grid) return;
 
-    grid.innerHTML = data.map(art => `
+    // Clone 3 artikel pertama untuk infinite scroll (hanya aktif di desktop carousel)
+    const items = [...data, ...data.slice(0, 3)];
+
+    grid.innerHTML = items.map(art => `
         <article class="portfolio-item snap-item group cursor-pointer reveal" onclick="viewArticle(${art.id})">
             <div class="glass-card rounded-[32px] overflow-hidden h-full flex flex-col">
                 <div class="relative h-56 overflow-hidden">

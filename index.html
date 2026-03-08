@@ -195,6 +195,7 @@
         /* Figma Style Carousel */
         .snap-carousel {
             display: flex;
+            /* Default flex for projects */
             overflow-x: auto;
             scroll-snap-type: x mandatory;
             gap: 1.5rem;
@@ -202,6 +203,14 @@
             padding-inline: 1.5rem;
             -webkit-overflow-scrolling: touch;
             scroll-behavior: smooth;
+        }
+
+        #articles-grid {
+            display: grid;
+            grid-auto-flow: column;
+            grid-template-rows: repeat(2, 1fr);
+            /* 2 baris artikel di desktop carousel */
+            gap: 2rem;
         }
 
         .snap-carousel::-webkit-scrollbar {
@@ -224,6 +233,9 @@
             #articles-grid {
                 display: grid !important;
                 grid-template-columns: repeat(2, 1fr) !important;
+                grid-template-rows: none !important;
+                /* Matikan 2 baris horizontal di mobile */
+                grid-auto-flow: row !important;
                 gap: 0.75rem !important;
                 padding-inline: 0 !important;
                 overflow-x: visible !important;
@@ -248,7 +260,7 @@
             }
 
             #articles-grid h3 {
-                font-size: 0.9rem !important;
+                font-size: 0.85rem !important;
                 line-height: 1.2 !important;
             }
 
@@ -258,7 +270,7 @@
             }
 
             #articles-grid .flex.items-center.gap-4 {
-                gap: 0.5rem !important;
+                gap: 0.4rem !important;
                 font-size: 8px !important;
             }
 

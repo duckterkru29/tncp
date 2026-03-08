@@ -48,8 +48,8 @@ function renderProjects(data) {
     const grid = document.getElementById('projects-grid');
     if (!grid) return;
 
-    // Clone 8 item pertama ke belakang untuk efek infinite loop yang sangat lega
-    const items = [...data, ...data.slice(0, 8)];
+    // Clone 10 item untuk buffer infinite loop yang sangat luas
+    const items = [...data, ...data.slice(0, 10)];
 
     grid.innerHTML = items.map(item => `
         <div class="portfolio-item snap-item group relative reveal">
@@ -141,25 +141,26 @@ function initAutoSlider() {
             if (!grid) return;
 
             const items = grid.querySelectorAll('.snap-item');
-            if (items.length === 0) return;
+            if (items.length < 10) return;
 
-            const firstItem = items[0];
             const gap = parseFloat(getComputedStyle(grid).gap) || 0;
-            const scrollStep = firstItem.offsetWidth + gap;
+            const scrollStep = items[0].offsetWidth + gap;
 
-            // Logika baru: Jika sisa scroll tinggal sedikit, lompat ke awal
-            // Kita klon 8 item, jadi scrollWidth pasti jauh melebihi konten asli
-            const isAtEnd = grid.scrollLeft + grid.offsetWidth >= grid.scrollWidth - scrollStep;
+            // Hitung lebar asli sebelum klon (N item asli + 10 klon)
+            const originalCount = items.length - 10;
+            const originalWidth = originalCount * scrollStep;
 
-            if (isAtEnd) {
+            // Jika sudah mencapai konten asli yang terakhir (mulai masuk clone), 
+            // kita lakukan 'jump back' instan ke 0 sebelum meluncur lagi.
+            if (grid.scrollLeft >= originalWidth - 5) {
                 grid.scrollTo({ left: 0, behavior: 'auto' });
-                // Jeda 50ms sangat krusial agar browser swap posisi secara instan
-                setTimeout(() => {
-                    grid.scrollBy({ left: scrollStep, behavior: 'smooth' });
-                }, 50);
-            } else {
-                grid.scrollBy({ left: scrollStep, behavior: 'smooth' });
             }
+
+            // Gunakan pembulatan dan requestAnimationFrame agar scroll selalu presisi ke item berikutnya
+            requestAnimationFrame(() => {
+                const currentPos = Math.round(grid.scrollLeft / scrollStep) * scrollStep;
+                grid.scrollTo({ left: currentPos + scrollStep, behavior: 'smooth' });
+            });
         });
     }, interval);
 }
@@ -216,8 +217,8 @@ function renderArticles(data) {
     const grid = document.getElementById('articles-grid');
     if (!grid) return;
 
-    // Clone 8 artikel untuk infinite loop yang lega
-    const items = [...data, ...data.slice(0, 8)];
+    // Clone 10 artikel untuk infinite loop yang lega
+    const items = [...data, ...data.slice(0, 10)];
 
     grid.innerHTML = items.map(art => `
         <article class="article-item snap-item group cursor-pointer reveal" onclick="viewArticle(${art.id})">

@@ -1,8 +1,26 @@
 {
-  "visits": 61,
+  "visits": 64,
   "orders": 19,
   "articleViews": 19,
   "logs": [
+    {
+      "action": "visit",
+      "details": "Home Page",
+      "time": "2026-03-08T09:54:24.946Z",
+      "ip": "::1"
+    },
+    {
+      "action": "visit",
+      "details": "Home Page",
+      "time": "2026-03-08T09:54:21.915Z",
+      "ip": "::1"
+    },
+    {
+      "action": "visit",
+      "details": "Home Page",
+      "time": "2026-03-08T09:54:16.563Z",
+      "ip": "::1"
+    },
     {
       "action": "visit",
       "details": "Home Page",
@@ -283,24 +301,6 @@
       "action": "read_article",
       "details": "Membaca: Scan Backdoor Pada Sistem Linux Atau Windows",
       "time": "2026-03-08T08:49:46.760Z",
-      "ip": "::1"
-    },
-    {
-      "action": "read_article",
-      "details": "Membaca: Keamanan Untuk Web Aplikasi Pada Web Server",
-      "time": "2026-03-08T08:49:32.317Z",
-      "ip": "::1"
-    },
-    {
-      "action": "read_article",
-      "details": "Membaca: Membuat Akun Setara Root Di Linux",
-      "time": "2026-03-08T08:49:21.506Z",
-      "ip": "::1"
-    },
-    {
-      "action": "read_article",
-      "details": "Membaca: Implementasi Pentaho Server Dengan PostgreSQL",
-      "time": "2026-03-08T08:48:48.541Z",
       "ip": "::1"
     }
   ]

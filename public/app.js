@@ -48,8 +48,8 @@ function renderProjects(data) {
     const grid = document.getElementById('projects-grid');
     if (!grid) return;
 
-    // Clone 4 item pertama ke belakang untuk efek infinite loop yang mulus
-    const items = [...data, ...data.slice(0, 4)];
+    // Clone 8 item pertama ke belakang untuk efek infinite loop yang sangat lega
+    const items = [...data, ...data.slice(0, 8)];
 
     grid.innerHTML = items.map(item => `
         <div class="portfolio-item snap-item group relative reveal">
@@ -140,9 +140,6 @@ function initAutoSlider() {
             const grid = document.getElementById(id);
             if (!grid) return;
 
-            // Jangan auto-slide artikel di mobile karena sekarang mode Grid statis
-            if (id === 'articles-grid' && window.innerWidth < 768) return;
-
             const items = grid.querySelectorAll('.snap-item');
             if (items.length === 0) return;
 
@@ -150,16 +147,13 @@ function initAutoSlider() {
             const gap = parseFloat(getComputedStyle(grid).gap) || 0;
             const scrollStep = firstItem.offsetWidth + gap;
 
-            // Hitung lebar konten asli sebelum klon (kita mengklon 4 item di renderer)
-            // Jadi ada total (N + 4) items. Ujung konten asli adalah (N * scrollStep)
-            // Namun cara paling aman adalah mendeteksi sisa scroll yang sudah habis
-
-            const isAtEnd = grid.scrollLeft + grid.offsetWidth >= grid.scrollWidth - 50;
+            // Logika baru: Jika sisa scroll tinggal sedikit, lompat ke awal
+            // Kita klon 8 item, jadi scrollWidth pasti jauh melebihi konten asli
+            const isAtEnd = grid.scrollLeft + grid.offsetWidth >= grid.scrollWidth - scrollStep;
 
             if (isAtEnd) {
-                // Lompat instan ke awal tanpa animasi
                 grid.scrollTo({ left: 0, behavior: 'auto' });
-                // Beri jeda 50ms agar browser render posisi 0, baru geser ke item ke-1 secara smooth
+                // Jeda 50ms sangat krusial agar browser swap posisi secara instan
                 setTimeout(() => {
                     grid.scrollBy({ left: scrollStep, behavior: 'smooth' });
                 }, 50);
@@ -222,8 +216,8 @@ function renderArticles(data) {
     const grid = document.getElementById('articles-grid');
     if (!grid) return;
 
-    // Clone 4 artikel pertama untuk infinite scroll yang mulus
-    const items = [...data, ...data.slice(0, 4)];
+    // Clone 8 artikel untuk infinite loop yang lega
+    const items = [...data, ...data.slice(0, 8)];
 
     grid.innerHTML = items.map(art => `
         <article class="article-item snap-item group cursor-pointer reveal" onclick="viewArticle(${art.id})">

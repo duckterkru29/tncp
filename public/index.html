@@ -232,54 +232,22 @@
             scroll-snap-stop: always;
         }
 
-        /* Specific for Article Mobile Grid */
+        /* Mobile Specific Card Refinements */
         @media (max-width: 767px) {
-            #articles-grid {
-                display: grid !important;
-                grid-template-columns: repeat(2, 1fr) !important;
-                grid-template-rows: none !important;
-                /* Matikan 2 baris horizontal di mobile */
-                grid-auto-flow: row !important;
-                gap: 0.75rem !important;
-                padding-inline: 0 !important;
-                overflow-x: visible !important;
-            }
-
-            #articles-grid .portfolio-item {
-                flex: none !important;
-                width: 100% !important;
-                scroll-snap-align: none !important;
-            }
-
-            #articles-grid .glass-card {
+            .glass-card {
                 border-radius: 1.5rem !important;
             }
 
-            #articles-grid .h-56 {
-                height: 120px !important;
+            .h-56 {
+                height: 180px !important;
             }
 
-            #articles-grid .p-8 {
-                padding: 1rem !important;
+            .p-8 {
+                padding: 1.25rem !important;
             }
 
-            #articles-grid h3 {
-                font-size: 0.85rem !important;
-                line-height: 1.2 !important;
-            }
-
-            #articles-grid p,
-            #articles-grid .tracking-widest {
-                display: none !important;
-            }
-
-            #articles-grid .flex.items-center.gap-4 {
-                gap: 0.4rem !important;
-                font-size: 8px !important;
-            }
-
-            .article-nav {
-                display: none !important;
+            h3 {
+                font-size: 1.1rem !important;
             }
         }
 

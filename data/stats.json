@@ -1,8 +1,104 @@
 {
-  "visits": 38,
-  "orders": 11,
+  "visits": 41,
+  "orders": 19,
   "articleViews": 19,
   "logs": [
+    {
+      "action": "visit",
+      "details": "Home Page",
+      "time": "2026-03-08T09:15:00.243Z",
+      "ip": "::1"
+    },
+    {
+      "action": "filter_portfolio",
+      "details": "User filter portfolio ke: all",
+      "time": "2026-03-08T09:13:51.538Z",
+      "ip": "::1"
+    },
+    {
+      "action": "filter_portfolio",
+      "details": "User filter portfolio ke: system",
+      "time": "2026-03-08T09:13:50.309Z",
+      "ip": "::1"
+    },
+    {
+      "action": "filter_portfolio",
+      "details": "User filter portfolio ke: mobile",
+      "time": "2026-03-08T09:11:18.208Z",
+      "ip": "::1"
+    },
+    {
+      "action": "filter_portfolio",
+      "details": "User filter portfolio ke: web",
+      "time": "2026-03-08T09:11:16.777Z",
+      "ip": "::1"
+    },
+    {
+      "action": "visit",
+      "details": "Home Page",
+      "time": "2026-03-08T09:10:49.755Z",
+      "ip": "::1"
+    },
+    {
+      "action": "interest",
+      "details": "Menambah ke keranjang: Reservasi",
+      "time": "2026-03-08T09:10:09.728Z",
+      "ip": "::1"
+    },
+    {
+      "action": "interest",
+      "details": "Menambah ke keranjang: Portfolio",
+      "time": "2026-03-08T09:10:08.763Z",
+      "ip": "::1"
+    },
+    {
+      "action": "interest",
+      "details": "Menambah ke keranjang: FinTrack",
+      "time": "2026-03-08T09:10:07.656Z",
+      "ip": "::1"
+    },
+    {
+      "action": "interest",
+      "details": "Menambah ke keranjang: Quran Bersama",
+      "time": "2026-03-08T09:10:06.610Z",
+      "ip": "::1"
+    },
+    {
+      "action": "interest",
+      "details": "Menambah ke keranjang: Quran Bersama",
+      "time": "2026-03-08T09:10:06.098Z",
+      "ip": "::1"
+    },
+    {
+      "action": "interest",
+      "details": "Menambah ke keranjang: Digital Clean-Up & Privacy Protection Service",
+      "time": "2026-03-08T09:10:04.247Z",
+      "ip": "::1"
+    },
+    {
+      "action": "interest",
+      "details": "Menambah ke keranjang: Vulnerability Assessment & Penetration Testing (VAPT) Web Application",
+      "time": "2026-03-08T09:10:02.322Z",
+      "ip": "::1"
+    },
+    {
+      "action": "interest",
+      "details": "Menambah ke keranjang: Ticketing",
+      "time": "2026-03-08T09:09:59.853Z",
+      "ip": "::1"
+    },
+    {
+      "action": "expand_marketplace",
+      "details": "User memperluas katalog produk marketplace",
+      "time": "2026-03-08T09:09:37.022Z",
+      "ip": "::1"
+    },
+    {
+      "action": "visit",
+      "details": "Home Page",
+      "time": "2026-03-08T09:09:14.806Z",
+      "ip": "::1"
+    },
     {
       "action": "visit",
       "details": "Home Page",
@@ -205,102 +301,6 @@
       "action": "visit",
       "details": "Home Page",
       "time": "2026-03-07T23:37:50.948Z",
-      "ip": "::1"
-    },
-    {
-      "action": "visit",
-      "details": "Home Page",
-      "time": "2026-03-07T23:24:08.163Z",
-      "ip": "::1"
-    },
-    {
-      "action": "visit",
-      "details": "Home Page",
-      "time": "2026-03-07T23:22:25.492Z",
-      "ip": "::1"
-    },
-    {
-      "action": "visit",
-      "details": "Home Page",
-      "time": "2026-03-07T23:21:32.119Z",
-      "ip": "::1"
-    },
-    {
-      "action": "visit",
-      "details": "Home Page",
-      "time": "2026-03-07T23:20:15.903Z",
-      "ip": "::1"
-    },
-    {
-      "action": "filter_portfolio",
-      "details": "User filter portfolio ke: all",
-      "time": "2026-03-07T23:19:41.315Z",
-      "ip": "::1"
-    },
-    {
-      "action": "filter_portfolio",
-      "details": "User filter portfolio ke: system",
-      "time": "2026-03-07T23:19:39.329Z",
-      "ip": "::1"
-    },
-    {
-      "action": "filter_portfolio",
-      "details": "User filter portfolio ke: mobile",
-      "time": "2026-03-07T23:19:37.451Z",
-      "ip": "::1"
-    },
-    {
-      "action": "filter_portfolio",
-      "details": "User filter portfolio ke: web",
-      "time": "2026-03-07T23:19:35.940Z",
-      "ip": "::1"
-    },
-    {
-      "action": "visit",
-      "details": "Home Page",
-      "time": "2026-03-07T23:19:21.766Z",
-      "ip": "::1"
-    },
-    {
-      "action": "visit",
-      "details": "Home Page",
-      "time": "2026-03-07T23:11:19.924Z",
-      "ip": "::1"
-    },
-    {
-      "action": "visit",
-      "details": "Home Page",
-      "time": "2026-03-07T23:05:27.525Z",
-      "ip": "::1"
-    },
-    {
-      "action": "interest",
-      "details": "Menambah ke keranjang: Ticketing",
-      "time": "2026-03-07T23:04:40.462Z",
-      "ip": "::1"
-    },
-    {
-      "action": "interest",
-      "details": "Menambah ke keranjang: Reservasi",
-      "time": "2026-03-07T23:04:39.778Z",
-      "ip": "::1"
-    },
-    {
-      "action": "interest",
-      "details": "Menambah ke keranjang: FinTrack",
-      "time": "2026-03-07T23:04:36.987Z",
-      "ip": "::1"
-    },
-    {
-      "action": "interest",
-      "details": "Menambah ke keranjang: Portfolio",
-      "time": "2026-03-07T23:04:36.230Z",
-      "ip": "::1"
-    },
-    {
-      "action": "interest",
-      "details": "Menambah ke keranjang: FinTrack",
-      "time": "2026-03-07T23:04:35.447Z",
       "ip": "::1"
     }
   ]

@@ -128,19 +128,21 @@ window.filterProjects = (category) => {
 
 // Auto Slider Logic
 function initAutoSlider() {
-    const grid = document.getElementById('projects-grid');
-    if (!grid) return;
-
-    let scrollAmount = 0;
+    const grids = ['projects-grid', 'articles-grid'];
     const scrollStep = 450;
-    const interval = 5000; // 5 Detik
+    const interval = 5000;
 
     setInterval(() => {
-        if (grid.scrollLeft + grid.offsetWidth >= grid.scrollWidth) {
-            grid.scrollTo({ left: 0, behavior: 'smooth' });
-        } else {
-            grid.scrollBy({ left: scrollStep, behavior: 'smooth' });
-        }
+        grids.forEach(id => {
+            const grid = document.getElementById(id);
+            if (!grid) return;
+
+            if (grid.scrollLeft + grid.offsetWidth >= grid.scrollWidth - 10) {
+                grid.scrollTo({ left: 0, behavior: 'smooth' });
+            } else {
+                grid.scrollBy({ left: scrollStep, behavior: 'smooth' });
+            }
+        });
     }, interval);
 }
 
@@ -196,20 +198,17 @@ function renderArticles(data) {
     const grid = document.getElementById('articles-grid');
     if (!grid) return;
 
-    // Tampilkan hanya 2 baris (Desktop 3x2 = 6 artikel)
-    const limitedData = data.slice(0, 6);
-
-    grid.innerHTML = limitedData.map(art => `
-        <article class="group cursor-pointer reveal" onclick="viewArticle(${art.id})">
-            <div class="glass-card rounded-[32px] overflow-hidden">
+    grid.innerHTML = data.map(art => `
+        <article class="portfolio-item snap-item group cursor-pointer reveal" onclick="viewArticle(${art.id})">
+            <div class="glass-card rounded-[32px] overflow-hidden h-full flex flex-col">
                 <div class="relative h-56 overflow-hidden">
                     <img src="${art.coverImage ? './uploads/' + art.coverImage : `https://source.unsplash.com/800x600/?tech,it,${art.id}`}" 
                          class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700">
                     <div class="absolute top-6 left-6">
-                        <span class="px-4 py-1.5 bg-dark/80 backdrop-blur-md rounded-full text-[10px] font-black uppercase tracking-widest border border-white/10">${art.category}</span>
+                        <span class="px-4 py-1.5 bg-dark/80 backdrop-blur-md rounded-full text-[10px] font-black uppercase tracking-widest border border-white/10 text-white">${art.category}</span>
                     </div>
                 </div>
-                <div class="p-8 space-y-4">
+                <div class="p-8 space-y-4 flex-grow">
                     <div class="flex items-center gap-4 text-[10px] font-bold text-gray-500 uppercase tracking-widest">
                         <span><i data-lucide="calendar" class="inline w-3 h-3 mr-1"></i> ${new Date(art.publishedDate).toLocaleDateString()}</span>
                         <span><i data-lucide="clock" class="inline w-3 h-3 mr-1"></i> ${art.readTime} MIN READ</span>

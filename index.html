@@ -560,8 +560,28 @@
                 <p class="text-gray-400">Deep dive ke dunia engineering dan solusi IT.</p>
             </div>
 
-            <div class="grid md:grid-cols-3 gap-8" id="articles-grid">
+            <div class="snap-carousel hide-scrollbar" id="articles-grid">
                 <!-- Article cards -->
+            </div>
+
+            <!-- Carousel Navigation & Hint for Articles -->
+            <div
+                class="flex flex-col md:flex-row items-center justify-between mt-10 border-t border-white/5 pt-8 reveal gap-6">
+                <div class="flex items-center gap-4 text-gray-500 text-sm italic">
+                    <i data-lucide="mouse-pointer-2" class="w-4 h-4 animate-bounce"></i>
+                    <span>Tahan & geser untuk melihat artikel lainnya</span>
+                </div>
+                <div class="flex gap-4">
+                    <button
+                        onclick="document.getElementById('articles-grid').scrollBy({left: -400, behavior: 'smooth'})"
+                        class="w-14 h-14 glass rounded-2xl flex items-center justify-center hover:bg-primary transition-all border border-white/10 group">
+                        <i data-lucide="arrow-left" class="w-6 h-6 group-hover:scale-110 transition-transform"></i>
+                    </button>
+                    <button onclick="document.getElementById('articles-grid').scrollBy({left: 400, behavior: 'smooth'})"
+                        class="w-14 h-14 glass rounded-2xl flex items-center justify-center hover:bg-primary transition-all border border-white/10 group">
+                        <i data-lucide="arrow-right" class="w-6 h-6 group-hover:scale-110 transition-transform"></i>
+                    </button>
+                </div>
             </div>
         </div>
     </section>

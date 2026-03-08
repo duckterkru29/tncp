@@ -150,10 +150,11 @@ function initAutoSlider() {
             const gap = parseFloat(getComputedStyle(grid).gap) || 0;
             const scrollStep = firstItem.offsetWidth + gap;
 
-            // Jika sampai di klon terakhir (ujung kanan), lompat instan ke awal tanpa animasi
-            if (grid.scrollLeft + grid.offsetWidth >= grid.scrollWidth - 20) {
+            // Logika deteksi ujung yang lebih longgar (+- 100px) agar tidak macet
+            const isAtEnd = grid.scrollLeft + grid.offsetWidth >= grid.scrollWidth - 100;
+
+            if (isAtEnd) {
                 grid.scrollTo({ left: 0, behavior: 'auto' });
-                // Lalu gulir ke item pertama secara smooth
                 setTimeout(() => {
                     grid.scrollBy({ left: scrollStep, behavior: 'smooth' });
                 }, 50);
@@ -216,8 +217,8 @@ function renderArticles(data) {
     const grid = document.getElementById('articles-grid');
     if (!grid) return;
 
-    // Clone 3 artikel pertama untuk infinite scroll (hanya aktif di desktop carousel)
-    const items = [...data, ...data.slice(0, 3)];
+    // Clone 4 artikel pertama untuk infinite scroll yang mulus
+    const items = [...data, ...data.slice(0, 4)];
 
     grid.innerHTML = items.map(art => `
         <article class="portfolio-item snap-item group cursor-pointer reveal" onclick="viewArticle(${art.id})">

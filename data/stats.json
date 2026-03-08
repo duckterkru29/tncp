@@ -1,8 +1,38 @@
 {
-  "visits": 49,
+  "visits": 54,
   "orders": 19,
   "articleViews": 19,
   "logs": [
+    {
+      "action": "visit",
+      "details": "Home Page",
+      "time": "2026-03-08T09:39:37.951Z",
+      "ip": "::1"
+    },
+    {
+      "action": "visit",
+      "details": "Home Page",
+      "time": "2026-03-08T09:36:43.926Z",
+      "ip": "::1"
+    },
+    {
+      "action": "visit",
+      "details": "Home Page",
+      "time": "2026-03-08T09:35:11.810Z",
+      "ip": "::1"
+    },
+    {
+      "action": "visit",
+      "details": "Home Page",
+      "time": "2026-03-08T09:33:24.958Z",
+      "ip": "::1"
+    },
+    {
+      "action": "visit",
+      "details": "Home Page",
+      "time": "2026-03-08T09:33:17.149Z",
+      "ip": "::1"
+    },
     {
       "action": "visit",
       "details": "Home Page",
@@ -271,36 +301,6 @@
       "action": "read_article",
       "details": "Membaca: Remove Dan Install SSH Pada Linux",
       "time": "2026-03-08T08:46:08.990Z",
-      "ip": "::1"
-    },
-    {
-      "action": "read_article",
-      "details": "Membaca: Implementasi Pentaho Server Dengan PostgreSQL",
-      "time": "2026-03-08T08:45:42.719Z",
-      "ip": "::1"
-    },
-    {
-      "action": "read_article",
-      "details": "Membaca: Remove Dan Install SSH Pada Linux",
-      "time": "2026-03-08T08:45:25.508Z",
-      "ip": "::1"
-    },
-    {
-      "action": "visit",
-      "details": "Home Page",
-      "time": "2026-03-08T08:45:20.964Z",
-      "ip": "::1"
-    },
-    {
-      "action": "read_article",
-      "details": "Membaca: Script Hardening Sistem Operasi Linux Dan Windows Dari Cloudneeti",
-      "time": "2026-03-08T08:42:04.008Z",
-      "ip": "::1"
-    },
-    {
-      "action": "visit",
-      "details": "Home Page",
-      "time": "2026-03-08T08:41:43.203Z",
       "ip": "::1"
     }
   ]

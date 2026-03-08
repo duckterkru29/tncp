@@ -1,8 +1,26 @@
 {
-  "visits": 41,
+  "visits": 44,
   "orders": 19,
   "articleViews": 19,
   "logs": [
+    {
+      "action": "visit",
+      "details": "Home Page",
+      "time": "2026-03-08T09:19:06.534Z",
+      "ip": "::1"
+    },
+    {
+      "action": "visit",
+      "details": "Home Page",
+      "time": "2026-03-08T09:19:06.110Z",
+      "ip": "::1"
+    },
+    {
+      "action": "visit",
+      "details": "Home Page",
+      "time": "2026-03-08T09:19:05.127Z",
+      "ip": "::1"
+    },
     {
       "action": "visit",
       "details": "Home Page",
@@ -283,24 +301,6 @@
       "action": "filter_portfolio",
       "details": "User filter portfolio ke: system",
       "time": "2026-03-07T23:38:35.570Z",
-      "ip": "::1"
-    },
-    {
-      "action": "filter_portfolio",
-      "details": "User filter portfolio ke: mobile",
-      "time": "2026-03-07T23:38:33.629Z",
-      "ip": "::1"
-    },
-    {
-      "action": "filter_portfolio",
-      "details": "User filter portfolio ke: web",
-      "time": "2026-03-07T23:38:32.776Z",
-      "ip": "::1"
-    },
-    {
-      "action": "visit",
-      "details": "Home Page",
-      "time": "2026-03-07T23:37:50.948Z",
       "ip": "::1"
     }
   ]

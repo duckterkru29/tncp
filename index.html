@@ -197,9 +197,11 @@
             display: flex;
             overflow-x: auto;
             scroll-snap-type: x mandatory;
-            gap: 2.5rem;
+            gap: 1.5rem;
             padding-bottom: 3rem;
+            padding-inline: 1.5rem;
             -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
         }
 
         .snap-carousel::-webkit-scrollbar {
@@ -214,6 +216,55 @@
         .portfolio-item {
             flex: 0 0 85vw;
             scroll-snap-align: center;
+            scroll-snap-stop: always;
+        }
+
+        /* Specific for Article Mobile Grid */
+        @media (max-width: 767px) {
+            #articles-grid {
+                display: grid !important;
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 0.75rem !important;
+                padding-inline: 0 !important;
+                overflow-x: visible !important;
+            }
+
+            #articles-grid .portfolio-item {
+                flex: none !important;
+                width: 100% !important;
+                scroll-snap-align: none !important;
+            }
+
+            #articles-grid .glass-card {
+                border-radius: 1.5rem !important;
+            }
+
+            #articles-grid .h-56 {
+                height: 120px !important;
+            }
+
+            #articles-grid .p-8 {
+                padding: 1rem !important;
+            }
+
+            #articles-grid h3 {
+                font-size: 0.9rem !important;
+                line-height: 1.2 !important;
+            }
+
+            #articles-grid p,
+            #articles-grid .tracking-widest {
+                display: none !important;
+            }
+
+            #articles-grid .flex.items-center.gap-4 {
+                gap: 0.5rem !important;
+                font-size: 8px !important;
+            }
+
+            .article-nav {
+                display: none !important;
+            }
         }
 
         @media (min-width: 768px) {
@@ -228,6 +279,7 @@
 
             .snap-carousel {
                 padding-inline: 0;
+                gap: 2.5rem;
             }
         }
     </style>
@@ -566,7 +618,7 @@
 
             <!-- Carousel Navigation & Hint for Articles -->
             <div
-                class="flex flex-col md:flex-row items-center justify-between mt-10 border-t border-white/5 pt-8 reveal gap-6">
+                class="article-nav flex flex-col md:flex-row items-center justify-between mt-10 border-t border-white/5 pt-8 reveal gap-6">
                 <div class="flex items-center gap-4 text-gray-500 text-sm italic">
                     <i data-lucide="mouse-pointer-2" class="w-4 h-4 animate-bounce"></i>
                     <span>Tahan & geser untuk melihat artikel lainnya</span>

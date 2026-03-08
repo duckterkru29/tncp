@@ -137,6 +137,15 @@ function initAutoSlider() {
             const grid = document.getElementById(id);
             if (!grid) return;
 
+            // Jangan auto-slide artikel di mobile karena sekarang mode Grid
+            if (id === 'articles-grid' && window.innerWidth < 768) return;
+
+            const item = grid.querySelector('.snap-item');
+            if (!item) return;
+
+            const gap = parseFloat(getComputedStyle(grid).gap) || 0;
+            const scrollStep = item.offsetWidth + gap;
+
             if (grid.scrollLeft + grid.offsetWidth >= grid.scrollWidth - 10) {
                 grid.scrollTo({ left: 0, behavior: 'smooth' });
             } else {

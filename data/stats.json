@@ -1,8 +1,14 @@
 {
-  "visits": 64,
+  "visits": 65,
   "orders": 19,
   "articleViews": 19,
   "logs": [
+    {
+      "action": "visit",
+      "details": "Home Page",
+      "time": "2026-03-08T10:04:27.909Z",
+      "ip": "::1"
+    },
     {
       "action": "visit",
       "details": "Home Page",
@@ -295,12 +301,6 @@
       "action": "read_article",
       "details": "Membaca: Cek Penggunaan Bandwidth Pada Server Linux",
       "time": "2026-03-08T08:49:50.511Z",
-      "ip": "::1"
-    },
-    {
-      "action": "read_article",
-      "details": "Membaca: Scan Backdoor Pada Sistem Linux Atau Windows",
-      "time": "2026-03-08T08:49:46.760Z",
       "ip": "::1"
     }
   ]

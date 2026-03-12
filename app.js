@@ -55,7 +55,7 @@ function renderProjects(data) {
         <div class="portfolio-item snap-item group relative reveal cursor-pointer" onclick="viewProject(${item.id})">
             <div class="glass-card rounded-[40px] overflow-hidden border-white/5 group-hover:border-primary/50 transition-all duration-500 h-full flex flex-col">
                 <div class="relative aspect-[16/10] overflow-hidden">
-                    <img src="./uploads/${item.thumbnail}" loading="lazy" class="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-700" alt="${item.title}">
+                    <img src="./uploads/${item.thumbnail}" loading="lazy" class="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-700" alt="Source Code Aplikasi ${item.title}">
                     <div class="absolute inset-0 bg-gradient-to-t from-darker via-transparent to-transparent opacity-80"></div>
                     
                     ${item.isPopular ? `

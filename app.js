@@ -327,20 +327,20 @@ window.checkout = () => {
 // UTILS
 // ==========================================
 function updateDynamicContent() {
-    // Update Name footer & contact
-    const nameEls = document.querySelectorAll('.dynamic-name');
-    nameEls.forEach(el => el.innerText = settingsData.name);
+    // Memberikan nilai cadangan langsung jika settingsData kosong
+    const name = settingsData.name || "Teguh Nuraji C.P.";
+    const email = settingsData.email || "teguhncp@gmail.com";
+    const wa = settingsData.whatsapp || "6281310387659";
 
-    // Update Email
-    const emailEls = document.querySelectorAll('.dynamic-email');
-    emailEls.forEach(el => {
-        el.innerText = settingsData.email;
-        if (el.tagName === 'A') el.href = `mailto:${settingsData.email}`;
+    document.querySelectorAll('.dynamic-name').forEach(el => el.innerText = name);
+    document.querySelectorAll('.dynamic-email').forEach(el => {
+        el.innerText = email;
+        el.href = `mailto:${email}`;
     });
-
-    // Update WhatsApp
-    const waEls = document.querySelectorAll('.dynamic-wa');
-    waEls.forEach(el => el.innerText = '+' + settingsData.whatsapp);
+    document.querySelectorAll('.dynamic-wa').forEach(el => {
+        el.innerText = `+${wa}`;
+        if(el.tagName === 'A') el.href = `https://wa.me/${wa}`;
+    });
 }
 
 function showToast(msg) {

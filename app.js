@@ -351,7 +351,16 @@ function updateDynamicContent() {
 
 function showToast(msg) {
     const toast = document.getElementById('toast');
-    document.getElementById('toast-message').innerText = msg;
+    toast.innerHTML = `
+        <div class="flex items-center gap-3">
+            <div class="p-2 bg-green-500/20 rounded-full">
+                <i data-lucide="check-circle" class="w-4 h-4 text-green-500"></i>
+            </div>
+            <span class="font-bold text-sm text-white">${msg}</span>
+        </div>
+    `;
+    if (window.lucide) lucide.createIcons();
+    
     toast.classList.remove('translate-y-32', 'opacity-0');
     setTimeout(() => toast.classList.add('translate-y-32', 'opacity-0'), 3000);
 }

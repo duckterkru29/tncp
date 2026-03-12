@@ -1,6 +1,8 @@
 User-agent: *
 Allow: /
-Allow: /data/
-Disallow: /uploads/private/
 
+# Arahkan Google langsung ke peta situs Anda
 Sitemap: https://tncp.my.id/sitemap.xml
+
+# Opsional: Lindungi folder data jika ada informasi sensitif
+Disallow: /data/config.json

@@ -327,19 +327,22 @@ window.checkout = () => {
 // UTILS
 // ==========================================
 function updateDynamicContent() {
-    // Memberikan nilai cadangan langsung jika settingsData kosong
-    const name = settingsData.name || "Teguh Nuraji C.P.";
-    const email = settingsData.email || "teguhncp@gmail.com";
-    const wa = settingsData.whatsapp || "6281310387659";
+    const email = settingsData.email || 'teguhncp@gmail.com';
+    const wa = settingsData.whatsapp || '6281310387659';
 
-    document.querySelectorAll('.dynamic-name').forEach(el => el.innerText = name);
+    // Update Nama
+    document.querySelectorAll('.dynamic-name').forEach(el => el.innerText = settingsData.name || 'TNCP');
+
+    // Update Email & Link-nya
     document.querySelectorAll('.dynamic-email').forEach(el => {
         el.innerText = email;
-        el.href = `mailto:${email}`;
+        if (el.closest('a')) el.closest('a').href = `mailto:${email}`;
     });
+
+    // Update WA & Link-nya
     document.querySelectorAll('.dynamic-wa').forEach(el => {
-        el.innerText = `+${wa}`;
-        if(el.tagName === 'A') el.href = `https://wa.me/${wa}`;
+        el.innerText = '+' + wa;
+        if (el.closest('a')) el.closest('a').href = `https://wa.me/${wa}`;
     });
 }
 

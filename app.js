@@ -272,13 +272,16 @@ function updateCart() {
     badge.classList.toggle('hidden', cart.length === 0);
 
     if (cart.length === 0) {
-        container.innerHTML = `
-            <div class="flex flex-col items-center justify-center h-64 opacity-20">
-                <i data-lucide="shopping-basket" class="w-20 h-20 mb-4"></i>
-                <p class="font-bold">Keranjang Kosong</p>
+    container.innerHTML = `
+        <div class="flex flex-col items-center justify-center h-full py-20 opacity-40 group">
+            <div class="w-24 h-24 bg-white/5 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
+                <i data-lucide="shopping-bag" class="w-10 h-10 text-primary"></i>
             </div>
-        `;
-    } else {
+            <p class="font-display font-bold text-xl text-white">Keranjang Kosong</p>
+            <p class="text-sm text-gray-500 mt-2 text-center px-10">Jelajahi karya terbaik kami dan mulai bangun solusi digital Anda.</p>
+        </div>
+    `;
+} else {
         container.innerHTML = cart.map((item, idx) => `
             <div class="flex items-center gap-4 group">
                 <div class="w-20 h-20 glass rounded-2xl overflow-hidden shrink-0">

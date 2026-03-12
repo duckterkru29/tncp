@@ -885,6 +885,11 @@
     if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false; // Blokir Ctrl+Shift+I
 };
     </script>
+
+    <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" 
+        class="fixed bottom-8 right-8 w-12 h-12 glass rounded-full flex items-center justify-center hover:bg-primary transition-all z-40 border border-white/10">
+    <i data-lucide="arrow-up" class="w-5 h-5"></i>
+</button>
 </body>
 
 </html>

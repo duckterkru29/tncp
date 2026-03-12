@@ -55,7 +55,7 @@ function renderProjects(data) {
         <div class="portfolio-item snap-item group relative reveal cursor-pointer" onclick="viewProject(${item.id})">
             <div class="glass-card rounded-[40px] overflow-hidden border-white/5 group-hover:border-primary/50 transition-all duration-500 h-full flex flex-col">
                 <div class="relative aspect-[16/10] overflow-hidden">
-                    <img src="./uploads/${item.thumbnail}" class="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-700" alt="${item.title}">
+                    <img src="./uploads/${item.thumbnail}" loading="lazy" class="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-700" alt="${item.title}">
                     <div class="absolute inset-0 bg-gradient-to-t from-darker via-transparent to-transparent opacity-80"></div>
                     
                     ${item.isPopular ? `
@@ -188,7 +188,7 @@ function renderMarketplace(data) {
     grid.innerHTML = displayData.map(item => `
         <div class="glass p-5 rounded-3xl space-y-4 hover:border-primary/50 transition-colors cursor-pointer" onclick="viewProject(${item.id})">
             <div class="aspect-square rounded-2xl overflow-hidden">
-                <img src="${item.thumbnail ? './uploads/' + item.thumbnail : `https://source.unsplash.com/400x400/?software,app,${item.id}`}" class="w-full h-full object-cover">
+                <img src="${item.thumbnail ? './uploads/' + item.thumbnail : `https://source.unsplash.com/400x400/?software,app,${item.id}`}" loading="lazy" class="w-full h-full object-cover">
             </div>
             <div class="text-left">
                 <h4 class="font-bold text-sm line-clamp-1">${item.title}</h4>
@@ -225,7 +225,7 @@ function renderArticles(data) {
             <div class="glass-card rounded-[32px] overflow-hidden h-full flex flex-col">
                 <div class="relative h-56 overflow-hidden">
                     <img src="${art.coverImage ? './uploads/' + art.coverImage : `https://source.unsplash.com/800x600/?tech,it,${art.id}`}" 
-                         class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700">
+                         loading="lazy" class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700">
                     <div class="absolute top-6 left-6">
                         <span class="px-4 py-1.5 bg-dark/80 backdrop-blur-md rounded-full text-[10px] font-black uppercase tracking-widest border border-white/10 text-white">${art.category}</span>
                     </div>
@@ -285,7 +285,7 @@ function updateCart() {
         container.innerHTML = cart.map((item, idx) => `
             <div class="flex items-center gap-4 group">
                 <div class="w-20 h-20 glass rounded-2xl overflow-hidden shrink-0">
-                    <img src="${item.img || 'https://via.placeholder.com/80'}" class="w-full h-full object-cover">
+                    <img src="${item.img || 'https://via.placeholder.com/80'}" loading="lazy" class="w-full h-full object-cover">
                 </div>
                 <div class="flex-1 space-y-1">
                     <h4 class="font-bold text-sm leading-tight">${item.title}</h4>

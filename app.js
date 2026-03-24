@@ -39,6 +39,7 @@ function renderUI() {
     renderMarketplace(projectsData);
     renderArticles(articlesData);
     initAutoSlider();
+    if (window.lucide) lucide.createIcons();
 }
 
 // ==========================================
@@ -329,18 +330,28 @@ window.checkout = () => {
 function updateDynamicContent() {
     // Update Name footer & contact
     const nameEls = document.querySelectorAll('.dynamic-name');
-    nameEls.forEach(el => el.innerText = settingsData.name);
+    nameEls.forEach(el => {
+        if (settingsData && settingsData.name) {
+            el.innerText = settingsData.name;
+        }
+    });
 
     // Update Email
     const emailEls = document.querySelectorAll('.dynamic-email');
     emailEls.forEach(el => {
-        el.innerText = settingsData.email;
-        if (el.tagName === 'A') el.href = `mailto:${settingsData.email}`;
+        if (settingsData && settingsData.email) {
+            el.innerText = settingsData.email;
+            if (el.tagName === 'A') el.href = `mailto:${settingsData.email}`;
+        }
     });
 
     // Update WhatsApp
     const waEls = document.querySelectorAll('.dynamic-wa');
-    waEls.forEach(el => el.innerText = '+' + settingsData.whatsapp);
+    waEls.forEach(el => {
+        if (settingsData && settingsData.whatsapp) {
+            el.innerText = '+' + settingsData.whatsapp;
+        }
+    });
 }
 
 function showToast(msg) {

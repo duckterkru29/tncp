@@ -233,5 +233,38 @@
     "thumbnail": "1772925537526-333742630.png",
     "salesCount": 0,
     "interestCount": 1
+  },
+  {
+    "id": 1774350869906,
+    "title": "Furnispace",
+    "slug": "furnispace",
+    "description": "FurniSpace adalah aplikasi e-commerce furnitur pintar yang dirancang dengan estetika modern, fitur sinkronisasi real-time, dan pengalaman pengguna yang luar biasa (UX-centric). Aplikasi ini dibangun sebagai platform Single Page Application (SPA) yang sangat responsif, menghubungkan frontend interaktif dengan backend PHP MySQL.",
+    "category": "web",
+    "price": 750000,
+    "originalPrice": 15000000,
+    "isAvailable": true,
+    "isPopular": false,
+    "techStack": [
+      "Vanilla HTML5",
+      "Modern CSS3 (Glassmorphism)",
+      "JavaScript (Vanilla ES6+)",
+      "Native PHP 8.x",
+      "MySQL (PDO Extension)",
+      "Google Fonts (Outfit)",
+      "FontAwesome 6 PRO",
+      "AOS Library (Animate On Scroll)."
+    ],
+    "features": [
+      "🚀 Real-Time Synchronization: Keranjang belanja, wishlist, dan riwayat pesanan disinkronkan langsung dengan database tanpa perlu refresh halaman.",
+      "❤️ Smart Wishlist: Tandai produk favorit dengan animasi halus dan pantau ketersediaannya secara real-time.",
+      "🛍️ Complete Shopping Flow: Dari pencarian kategori populer hingga checkout dengan formulir detail pengiriman.",
+      "📜 Professional Order History: Antarmuka riwayat pesanan yang bersih dengan fitur Batalkan Pesanan dan Ubah Alamat selagi status masih pending.",
+      "⭐ Real-Time Product Reviews: Ulasan produk kumulatif dari pembeli asli, lengkap dengan rating bintang dan komentar yang muncul seketika.",
+      "🔐 Secure Authentication: Sistem pendaftaran dan login yang terenkripsi, menjaga privasi data pelanggan.",
+      "🎨 Advanced UI/UX: Menggunakan Glassmorphism, Google Fonts, dan FontAwesome untuk estetika premium."
+    ],
+    "thumbnail": "1774350869894-854260542.png",
+    "salesCount": 0,
+    "interestCount": 0
   }
 ]
